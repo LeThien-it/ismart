@@ -1,0 +1,131 @@
+/*CATEGOGRY PRODUCT*/
+.category-product-wp{
+    background-color: #ecf0f1  ;
+}
+
+/* banner-slider */
+#banner-cat-pro-wp {
+    margin-bottom: 20px;
+}
+.banner-cat-main {
+    position: relative;
+}
+
+.banner-cat-main .owl-dots {
+    position: absolute;
+    bottom: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.banner-cat-main .owl-dots button {
+    outline: none;
+}
+
+.banner-cat-main.owl-theme .owl-dots .owl-dot.active span,
+.banner-cat-main.owl-theme .owl-dots .owl-dot:hover span {
+  background: #f15933;
+}
+
+.banner-cat-main .owl-prev, .banner-cat-main .owl-next {
+    opacity: 0.5;
+    transition: all 0.3s ease-in-out;
+}
+
+.banner-cat-main:hover .owl-prev, .banner-cat-main:hover .owl-next  {
+  opacity: 1;
+}
+
+.banner-cat-sub{
+    display: none;
+}
+.banner-cat-sub .img:first-child {
+    /* padding-bottom: 7.5px; */
+    height: 50%;
+}
+.banner-cat-sub .img:last-child {
+    /* padding-top: 7.5px; */
+    height: 50%;
+}
+.banner-cat-sub img {
+    max-height: 100%;
+}
+
+#category-product .sidebar{
+    flex-basis: 100%;
+}
+#category-product .main-content{
+    flex-basis: 100%;
+}
+
+/* filter */
+.filter-wp {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+}
+.filter-wp select {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid #cecece;
+    color: #666;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+
+.filter-wp button {
+    position: relative;
+    left: -4px;
+    background: #cd1818;
+    border: none;
+    outline: none;
+    padding: 3px 15px;
+    height: 100%;
+    line-height: 25px;
+    color: #fff;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.filter-wp form button:hover {
+    background: #cd1818;
+}
+
+#paging-wp {
+    text-align: center;
+    margin-top: 25px;
+}
+#paging-wp .list-item {
+    display: inline-block;
+}
+#paging-wp .list-item li {
+    float: left;
+    margin-right: 5px;
+}
+#paging-wp .list-item li:last-child {
+    margin-right: 0;
+}
+#paging-wp .list-item li a {
+    background: #ababab;
+    padding: 8px 12px;
+    color: #fff;
+}
+#paging-wp .list-item li a:hover {
+    background: #868686;
+}
+
+#list-product-wp .card-head h4 {
+    padding: 12px 15px;
+    font-family: "Roboto Medium";
+}
+
+#list-product-wp .card-head span {
+    font-family: "Roboto Regular";
+    font-size: 16px;
+    color: #6c757d;
+}
+
+.main-content .section-detail .card-sort {
+    padding: 0 15px;
+    margin-bottom: 25px;
+}

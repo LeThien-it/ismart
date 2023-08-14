@@ -1,0 +1,16 @@
+li.select2-selection__choice {
+    background-color: #121212 !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    color: rgba(255,255,255,.7);
+    float: right;
+    margin-left: 0px;
+}
+
+.select2-container--default .select2-search--inline .select2-search__field{
+    line-height: initial;
+}
+
+
+

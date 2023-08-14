@@ -1,0 +1,101 @@
+/*DETAIL BLOG*/
+#main-content-wp.detail-blog-page {
+  background: #f5f6fa;
+}
+
+.detail-blog-page .width-custom {
+  margin: 0 auto;
+  /* width: auto; */
+  max-width: 650px;
+}
+.detail-blog-page .main-content-blog {
+  background: #fff;
+  padding: 20px 15px;
+}
+.detail-blog-page #selling-wp {
+  margin-top: 0;
+}
+.detail-blog-page #social-wp {
+  margin-top: 25px;
+}
+#detail-blog-wp .section-title {
+  display: block;
+  font-size: 24px;
+  font-weight: normal;
+  line-height: normal;
+  font-family: 'Roboto Regular';
+  padding-bottom: 10px;
+}
+#detail-blog-wp .create-date {
+  position: relative;
+  display: block;
+  font-size: 13px;
+  color: #989898;
+  padding-left: 20px;
+  padding-bottom: 10px;
+}
+#detail-blog-wp .create-date:before {
+  position: absolute;
+  content: '\f017';
+  font-family: 'Font Awesome 5 Free';
+  top: 0;
+  left: 0;
+  font-size: 14px;
+}
+#detail-blog-wp .desc {
+  color: #6b6b6b;
+  line-height: 26px;
+}
+
+#detail-blog-wp .detail p,
+#detail-blog-wp .detail h2,
+#detail-blog-wp .detail h3 {
+  margin: 20px auto;
+  font-size: 16px;
+  color: #333;
+  line-height: 28px;
+  text-align: justify;
+  letter-spacing: 0.2px;
+}
+
+#detail-blog-wp .detail ul,
+ol {
+  margin: 10px auto;
+  width: 600px;
+}
+
+#detail-blog-wp .detail ul li {
+  list-style-type: disc;
+  margin-left: 15px;
+  line-height: 25px;
+  font-size: 16px;
+}
+
+#detail-blog-wp .detail h3 {
+  font-size: 22px;
+  line-height: 35px;
+}
+
+#detail-blog-wp .detail .imgwrap {
+  position: relative;
+  min-height: 100px;
+  margin-top: 5px;
+  background: #f1f1f1;
+}
+
+#detail-blog-wp .detail img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+#detail-blog-wp .detail .captionnews {
+  color: #999;
+  font-size: 14px;
+  font-style: italic;
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 15px;
+}

@@ -1,0 +1,166 @@
+/*BLOG*/
+.border-active{
+  border-bottom: 2px solid #f12a43;
+}
+#main-content-wp {
+  background: #ecf0f1;
+}
+
+.blog-page .sidebar-blog {
+  width: 23%;
+  display: none;
+}
+
+.blog-page .blog-page-wp{
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#selling-wp .section-title {
+  display: block;
+  font-size: 17px;
+  text-transform: uppercase;
+  text-align: center;
+  background: #969696;
+  color: #fff;
+  padding: 10px;
+  border-bottom: 1px solid #dadada;
+}
+
+#selling-wp .section-detail {
+  background: #fff;
+}
+
+#selling-wp .section-detail .list-item {
+  padding: 10px;
+}
+
+#selling-wp .section-detail .list-item li {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+}
+
+#selling-wp .section-detail .list-item li:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+#selling-wp .section-detail .list-item .thumb {
+  display: block;
+  width: 30%;
+  border: 1px solid #ddd;
+}
+
+#selling-wp .section-detail .list-item .info {
+  width: 70%;
+  padding-left: 10px;
+}
+
+#selling-wp .section-detail .list-item .info .product-name {
+  display: block;
+  color: #333;
+  line-height: 24px;
+  font-family: 'Roboto Medium';
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -moz-line-clamp: 1;
+  -o-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  max-height: 100%;
+  overflow: hidden;
+  margin-bottom: 2px;
+}
+
+#selling-wp .section-detail .list-item .info .price .new {
+  display: inline-block;
+  font-family: 'Roboto Medium';
+  color: #f12a43;
+  margin-right: 5px;
+}
+
+#selling-wp .section-detail .list-item .info .price .old {
+  font-family: 'Roboto Light';
+  color: #999;
+  text-decoration: line-through;
+  font-size: 13px;
+}
+
+#selling-wp .section-detail .list-item .info .buy-now {
+  display: block;
+  font-family: 'Roboto Medium';
+  text-transform: uppercase;
+  color: #333;
+  font-size: 13px;
+}
+
+.blog-page .main-content-blog {
+  width: auto;
+  max-width: 100%;
+  padding-bottom: 15px;
+  background-position: 10px 10px;
+}
+#list-blog-wp .section-head li{
+  font-size: 17px;
+}
+#list-blog-wp .list-item li {
+  display: flex;
+  padding-bottom: 30px;
+}
+#list-blog-wp .list-item li:last-child {
+  padding-bottom: 0;
+}
+#list-blog-wp .thumb {
+  /* width: 27%; */
+  width: 30%;
+}
+#list-blog-wp .info {
+  width: 73%;
+  padding-left: 25px;
+}
+#list-blog-wp .info .title {
+  display: block;
+  font-size: 16px;
+  line-height: 24px;
+  font-family: 'Roboto Medium';
+  text-align: justify;
+  color: #1f1f1f;
+  padding-bottom: 5px;
+  text-overflow: ellipsis;
+}
+
+#list-blog-wp .info .create-date {
+  position: relative;
+  display: block;
+  font-size: 13px;
+  color: #989898;
+  padding-left: 20px;
+  padding-bottom: 5px;
+}
+#list-blog-wp .info .create-date:before {
+  position: absolute;
+  content: '\f017';
+  font-family: 'Font Awesome 5 Free';
+  top: 0;
+  left: 0;
+  font-size: 14px;
+}
+
+#list-blog-wp .info .desc {
+  line-height: 26px;
+  color: #3f3f3f;
+  text-align: justify;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -moz-line-clamp: 3;
+  -o-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  max-height: 100%;
+  overflow: hidden;
+}

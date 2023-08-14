@@ -1,0 +1,43 @@
+#upload-photo,
+#upload-detail-image {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+.image_detail_product,
+.feature_image {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+}
+.container_image_detail,
+.feature_image_container {
+    margin-top: 20px;
+}
+
+.nav-tabs .nav-link.active {
+    font-weight: bold;
+    background-color: transparent;
+    border-bottom: 3px solid #dd0000;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+}
+
+.btn-wet {
+    color: #fff;
+    background-color: #34495e;
+    border-color: #34495e;
+}
+
+.pr-30px {
+    padding-right: 30px !important ;
+}
+
+.border-custom{
+  border-bottom: 3px solid #dd0000;
+}
+
+
+

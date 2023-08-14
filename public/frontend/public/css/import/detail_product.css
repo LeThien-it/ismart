@@ -1,0 +1,459 @@
+/*DETAIL PRODUCT*/
+.table {
+  margin-bottom: 0px;
+}
+
+#add-cart .modal-dialog {
+  margin: 6.75rem auto;
+}
+
+#add-cart .col-3 {
+  padding: 0;
+}
+
+.modal-pro-name {
+  font-size: 15px;
+}
+
+/* style mới */
+.main-content-head {
+  background-color: #fff;
+  padding: 0 5px;
+}
+
+.main-content-body {
+  padding: 0px 5px 30px;
+}
+
+.detail-product .product-name h5 {
+  font-family: 'Roboto Bold';
+  font-size: 20px;
+}
+
+#sync-small {
+  padding-top: 10px;
+}
+
+#sync-small .owl-item {
+  border: 1px solid #ccc;
+}
+#sync-small .owl-item.current {
+  border: 1px solid red;
+}
+
+/* product-select */
+
+.product-select .product-select-top a,
+.product-select .product-select-bottom a {
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  padding: 5px 10px;
+  margin-right: 10px;
+  color: #000;
+}
+
+.product-select-top a.active {
+  border: 1px solid red;
+}
+
+.product-select-bottom a.active {
+  border: 1px solid red;
+}
+
+/* promotion  */
+.product-promotion .promotion-head p {
+  font-family: 'Roboto Medium';
+  font-size: 18px;
+}
+
+.product-promotion .card-body p {
+  text-align: justify;
+}
+
+.product-promotion .card-body p:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.btn-muangay a > div {
+  border-radius: 4px;
+  font-size: 17px;
+  color: #fff;
+  text-align: center;
+  background: linear-gradient(to bottom, #ff1f1f 0, #d60f06 100%);
+  padding: 6px 0;
+  text-transform: uppercase;
+}
+
+.btn-muangay a > div span {
+  font-size: 12px;
+  color: #fff;
+  display: block;
+  text-transform: none;
+}
+
+/* content */
+
+/*======================================
+Start loadmore desc
+========================================*/
+.desc_cat .load-content {
+  height: 500px;
+  overflow: hidden;
+  line-height: 22px;
+}
+.desc_cat .load-content h3 {
+  /* font-size: 20px; */
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 28px;
+  margin: 10px 0;
+}
+
+.desc_cat .load-content p,
+.desc_cat .load-content div {
+  line-height: 1.5;
+  margin-bottom: 10px;
+  font-size: 16px !important;
+}
+
+.loadmoredesc {
+  display: block;
+  padding: 15px 0;
+  text-align: center;
+  background: #fff;
+  box-shadow: 0 3px 6px -4px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%);
+}
+
+/*======================================
+  End loadmore desc
+  ========================================*/
+
+/* review */
+#review {
+  border-radius: 8px;
+  padding: 10px;
+}
+
+#review h5 {
+  font-size: 1.1rem;
+}
+
+#review .vote {
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  display: flex;
+}
+
+#review .vote-left {
+  width: 40%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+  border-right: 1px solid #dee2e6;
+}
+
+#review .vote-left .rating-average {
+  /* font-size: 24px; */
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+#review .vote-left .rating-star {
+  margin-bottom: 5px;
+}
+
+#review .vote-left .rating-star i {
+  color: #ddd;
+  font-size: 12px;
+}
+
+#review .vote-right {
+  /* width: 100%; */
+  /* padding: 15px; */
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+}
+
+#review .vote-right .item-progress {
+  display: flex;
+  align-items: center;
+}
+
+#review .vote-right .item-progress .number-star {
+  /* margin-right: 15px; */
+  margin-right: 5px;
+}
+
+#review .vote-right .item-progress .number-star i {
+  font-size: 12px;
+  color: #f1c40f;
+}
+#review .vote-right .item-progress .progress {
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+  height: 0.5rem;
+}
+
+#review .vote-right .item-progress .count-evaluate {
+  /* margin-left: 15px; */
+  margin-left: 5px;
+}
+
+#review .vote-right .item-progress .count-evaluate span {
+  display: none;
+}
+
+#review .button-vote {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#review .button-vote a {
+  width: 225px;
+  height: 34px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  background: #d70018;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+/* #review-modal .modal-dialog,
+#parameter-detail .modal-dialog {
+  width: 600px;
+  max-width: 100%;
+} */
+
+#review-modal,
+#parameter-detail {
+  padding-right: 0 !important;
+}
+
+#review-modal .modal-content,
+#parameter-detail .modal-content {
+  border: none;
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+#review-modal .modal-header,
+#parameter-detail .modal-header,
+#add-cart .modal-header {
+  background-color: #cd1818;
+  align-items: center;
+}
+
+#review-modal .modal-header .modal-title,
+#parameter-detail .modal-header .modal-title,
+#add-cart .modal-header .modal-title {
+  width: calc(100% - (18px + 5px));
+  font-size: 18px;
+  line-height: 1.5;
+  color: #ffffff;
+  font-family: 'Roboto Medium';
+}
+
+#review-modal .modal-header button,
+#parameter-detail .modal-header button,
+#add-cart .modal-header button {
+  text-shadow: none;
+  opacity: 1;
+  outline: none;
+}
+
+#review-modal .modal-header button i,
+#parameter-detail .modal-header button i,
+#add-cart .modal-header button i {
+  color: #fff;
+  font-size: 18px;
+  font-family: 'Font Awesome 5 Free';
+}
+
+#review-modal #form-review .form-control {
+  font-size: 14px;
+}
+
+#review-modal #form-review .form-vote {
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  padding: 10px;
+}
+
+#review-modal #form-review .form-vote p {
+  font-family: 'Roboto Medium';
+  font-size: 17px;
+  margin-bottom: 15px;
+}
+
+#review-modal #ratingId ul {
+  display: flex;
+  justify-content: space-around;
+}
+
+#review-modal #ratingId ul li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+#review-modal #ratingId ul li span {
+  display: none;
+}
+
+#review-modal #ratingId ul li i {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #ddd;
+}
+
+#review-modal #ratingId ul li i.hovered-stars {
+  color: #ffcc36;
+}
+#review-modal #ratingId ul li i.clicked-stars {
+  color: #ffcc36;
+}
+
+#review .comment-box .comment-avatar {
+  flex-basis: 70px;
+  height: 70px;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  background: #ced4da;
+  color: #fff;
+}
+
+#review .comment-box .comment-content {
+  flex: 1;
+}
+
+#review .comment-box .comment-content .comment-name {
+  font-family: 'Roboto medium';
+  font-size: 17px;
+  margin-bottom: 5px;
+}
+#review .comment-box .comment-content .list-star {
+  margin-bottom: 5px;
+}
+
+#review .comment-box .comment-content .list-star i {
+  color: #ddd;
+}
+
+#review .comment-box .comment-content .list-star i.active,
+#review .vote-left .rating-star i.active {
+  color: #f1c40f;
+}
+
+#review .comment-box .comment-content .comment-description {
+  font-size: 1rem;
+}
+
+.parameter {
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  overflow: hidden;
+}
+
+.parameter table > tbody > tr:first-child > td {
+  border-top: none;
+}
+
+.parameter table > tbody > tr:last-child > td {
+  border-bottom: none;
+}
+
+.parameter table td:nth-child(odd) {
+  border-right: 1px solid #ddd;
+}
+
+.btn-show-parameter {
+  height: 34px;
+  line-height: 34px;
+  border-radius: 1rem;
+  box-shadow: rgba(60, 64, 67, 0.1) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+
+.btn-show-parameter a {
+  color: #000;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.parameter-table .box-title {
+  font-family: 'Roboto Medium';
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+.parameter-table .box-content {
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  overflow: hidden;
+}
+
+.parameter-table .box-content table > tbody > tr:first-child > td {
+  border-top: none;
+}
+
+.parameter-table .box-content table > tbody > tr:last-child > td {
+  border-bottom: none;
+}
+.parameter-table .box-content table td:nth-child(odd) {
+  border-right: 1px solid #ddd;
+}
+
+#parameter-detail .modal-footer {
+  border: none;
+}
+
+.product-price {
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+.product-price p.price {
+  font-family: 'Roboto Medium';
+  font-size: 20px;
+  color: #cd1818;
+  margin-right: 10px;
+}
+
+.product-price span.old-price {
+  color: #666;
+  font-size: 16px;
+  text-decoration-line: line-through;
+}
+
+#same-category-wp {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+}
+
+#same-category-wp .section-title {
+  /* font-size: 21px; */
+  font-size: 19px;
+  padding: 15px 10px;
+  text-transform: uppercase;
+}

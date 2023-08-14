@@ -1,0 +1,99 @@
+/*FOOTER*/
+
+#footer-wp #foot-top {
+  padding: 50px 10px;
+}
+
+#footer-wp #foot-top .row {
+  flex-direction: column;
+}
+#footer-wp #foot-top .block {
+  width: 100%;
+  padding-left: 0px;
+}
+
+#info-company .title {
+  font-size: 28px;
+  font-family: 'Roboto Medium';
+  font-weight: normal;
+  color: #da1818;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+}
+#info-company .desc,
+#newfeed .desc {
+  font-family: 'Roboto Light';
+  text-align: justify;
+  color: #6d6d6d;
+  margin-bottom: 25px;
+}
+.menu-ft .title,
+#newfeed .title {
+  font-size: 21px;
+  margin-bottom: 15px;
+}
+
+.menu-ft .list-item li {
+  margin-bottom: 10px;
+  color: #000;
+  font-family: 'Roboto Light';
+}
+.menu-ft .list-item li:last-child {
+  margin-bottom: 0;
+}
+.menu-ft .list-item li p {
+  position: relative;
+  padding-left: 25px;
+}
+.menu-ft .list-item li:nth-child(1) p:before,
+.menu-ft .list-item li:nth-child(2) p:before,
+.menu-ft .list-item li:nth-child(3) p:before {
+  position: absolute;
+  font-family: 'Font Awesome 5 Free';
+  top: 0;
+  left: 0;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.menu-ft .list-item li:nth-child(1) p:before {
+  content: '\f3c5';
+}
+
+.menu-ft .list-item li:nth-child(2) p:before {
+  content: '\f095';
+}
+
+.menu-ft .list-item li:nth-child(3) p:before {
+  content: '\f0e0';
+}
+
+#info-shop .list-item li a {
+  position: relative;
+  color: #000;
+  font-family: 'Roboto Light';
+  padding-left: 20px;
+}
+
+#info-shop .list-item li a:before {
+  position: absolute;
+  content: '';
+  top: 50%;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #da1818;
+  transform: translateY(-50%);
+}
+
+#foot-bot {
+  background: #da1818;
+  text-align: center;
+  padding: 10px 0px;
+}
+#foot-bot #copyright {
+  color: #fff;
+  line-height: normal;
+  font-family: 'Roboto Light';
+}

@@ -1,0 +1,16 @@
+#upload-photo,#upload-detail-image {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.image_detail_product, .feature_image {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+}
+.container_image_detail, .feature_image_container {
+  margin-top: 20px;
+}
+
+
