@@ -37,14 +37,14 @@ class ProductRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'nhập tên sản phẩm',
+            'name.required' => 'Nhập tên sản phẩm',
             'name.unique' => 'Tên sản phẩm đã tồn tại trên hệ thống',
-            'content.required' => 'nhập thông tin sản phẩm',
-            'warranty.required' => 'nhập nội dung bảo hành',
-            'promotion.required' => 'nhập nội dung khuyến mãi',
-            'parameter.required' => 'nhập cấu hình sản phẩm',
-            'parameter_detail.required' => 'nhập thông số kỹ thuật',
-            'category_product_id.required' => 'chọn danh mục sản phẩm ',
+            'content.required' => 'Nhập thông tin sản phẩm',
+            'warranty.required' => 'Nhập nội dung bảo hành',
+            'promotion.required' => 'Nhập nội dung khuyến mãi',
+            'parameter.required' => 'Nhập cấu hình sản phẩm',
+            'parameter_detail.required' => 'Nhập thông số kỹ thuật',
+            'category_product_id.required' => 'Chọn danh mục sản phẩm ',
         ];
     }
 }

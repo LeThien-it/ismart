@@ -11,7 +11,7 @@ class ProductVariant extends Model
     protected $guarded = [];
     
     function images(){
-        return $this->hasMany('App\ProductImage','product_variant_id');
+        return $this->hasMany('App\ProductImage','product_variant_id')->withTrashed();
     }
     
     function attributeValues(){
@@ -20,7 +20,7 @@ class ProductVariant extends Model
 
     function product()
     {
-        return $this->belongsTo('App\Product','product_id');
+        return $this->belongsTo('App\Product','product_id')->withTrashed();
     }
     
 }

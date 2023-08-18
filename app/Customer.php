@@ -15,6 +15,6 @@ class Customer extends Model
     }
     
     function orders(){
-        return $this->hasMany('App\Order','customer_id')->withTrashed();;
+        return $this->hasMany('App\Order','customer_id')->withTrashed();
     }
 }

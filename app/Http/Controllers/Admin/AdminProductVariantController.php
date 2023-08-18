@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\AttributeValue;
 use App\Http\Controllers\Controller;
 use App\Product;
 use App\ProductVariant;
@@ -10,7 +9,6 @@ use App\Traits\StorageImageTrait;
 use App\Attribute;
 use App\Http\Requests\ProductVariantAddRequest;
 use App\Http\Requests\ProductVariantUpdateRequest;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -31,15 +29,17 @@ class AdminProductVariantController extends Controller
         ];
 
         if ($kind == 'trash') {
-            $variants = ProductVariant::onlyTrashed()->latest()->paginate(8);
+            $variants = ProductVariant::onlyTrashed()
+                ->latest()
+                ->paginate(5);
             $list_act = [
                 'restore' => 'Khôi phục',
-                'forceDelete' => 'Xóa vĩnh viễn'
+                'forceDelete' => 'Xóa vĩnh viễn',
             ];
         } else {
-            $variants = ProductVariant::latest()->paginate(8);
+            $variants = ProductVariant::latest()->paginate(5);
             $list_act = [
-                'delete' => 'Xóa tạm thời'
+                'delete' => 'Xóa tạm thời',
             ];
 
             if ($request->search) {
@@ -47,56 +47,93 @@ class AdminProductVariantController extends Controller
                 $keyword = $request->input('keyword');
                 if ($keyword) {
                     if ($field == 'product_id') {
-                        $get_id = Product::where('name', 'like', '%' . $keyword . '%')->get();
-                        if(count($get_id) > 0){
+                        $get_id = Product::where(
+                            'name',
+                            'like',
+                            '%' . $keyword . '%'
+                        )->get();
+                        if (count($get_id) > 0) {
                             foreach ($get_id as $item) {
                                 $ids[] = $item->id;
                             }
-                        }else{
+                        } else {
                             $ids[] = 0;
                         }
-                        $variants = ProductVariant::whereIn($field, $ids)->paginate(8);
+                        $variants = ProductVariant::whereIn(
+                            $field,
+                            $ids
+                        )->paginate(5);
                     } else {
-                        $variants = ProductVariant::where($field, 'like', '%' . $keyword . '%')->paginate(8);
+                        $variants = ProductVariant::where(
+                            $field,
+                            'like',
+                            '%' . $keyword . '%'
+                        )->paginate(5);
                     }
                 }
                 $keyword1 = $request->input('keyword1');
 
                 if ($keyword1) {
                     if ($field == 'product_id') {
-                        $get_id = Product::where('name', 'like', '%' . $keyword1 . '%')->get();
-                        if(count($get_id) > 0){
+                        $get_id = Product::where(
+                            'name',
+                            'like',
+                            '%' . $keyword1 . '%'
+                        )->get();
+                        if (count($get_id) > 0) {
                             foreach ($get_id as $item) {
                                 $ids[] = $item->id;
                             }
-                        }else{
+                        } else {
                             $ids[] = 0;
                         }
-                        $variants = ProductVariant::whereIn($field, $ids)->onlyTrashed()->paginate(8);
+                        $variants = ProductVariant::whereIn($field, $ids)
+                            ->onlyTrashed()
+                            ->paginate(5);
                     } else {
-                        $variants = ProductVariant::where($field, 'like', '%' . $keyword1 . '%')->onlyTrashed()->paginate(8);
+                        $variants = ProductVariant::where(
+                            $field,
+                            'like',
+                            '%' . $keyword1 . '%'
+                        )
+                            ->onlyTrashed()
+                            ->paginate(5);
                     }
                     $list_act = [
                         'restore' => 'Khôi phục',
-                        'forceDelete' => 'Xóa vĩnh viễn'
+                        'forceDelete' => 'Xóa vĩnh viễn',
                     ];
-                    return view('admin.products.variants.list-trash', compact('variants', 'list_field', 'list_act', 'count'));
+                    return view(
+                        'admin.products.variants.list-trash',
+                        compact('variants', 'list_field', 'list_act', 'count')
+                    );
                 }
             }
         }
-        return view('admin.products.variants.list', compact('variants', 'list_field', 'list_act', 'count'));
+        return view(
+            'admin.products.variants.list',
+            compact('variants', 'list_field', 'list_act', 'count')
+        );
     }
 
     function add()
     {
         $attributes = Attribute::where('status', 1)->get();
-        $products = Product::where('status', 1)->latest()->get();
-        return view('admin.products.add.add-variant', compact('attributes', 'products'));
+        $products = Product::where('status', 1)
+            ->latest()
+            ->get();
+        return view(
+            'admin.products.add.add-variant',
+            compact('attributes', 'products')
+        );
     }
 
     function store(ProductVariantAddRequest $request)
     {
-        $dataFeatureImage = $this->uploadImageTrait($request->feature_image_path, 'product');
+        $dataFeatureImage = $this->uploadImageTrait(
+            $request->feature_image_path,
+            'product'
+        );
 
         $data = [
             'product_id' => $request->product_id,
@@ -115,7 +152,10 @@ class AdminProductVariantController extends Controller
         $variant->attributeValues()->attach($attributeValueIds);
         if ($request->hasFile('image_path')) {
             foreach ($request->image_path as $fileItem) {
-                $dataMultipleImage = $this->uploadImageTrait($fileItem, 'product');
+                $dataMultipleImage = $this->uploadImageTrait(
+                    $fileItem,
+                    'product'
+                );
                 $variant->images()->create([
                     'image_path' => $dataMultipleImage['file_path'],
                     'image_name' => $dataMultipleImage['file_name'],
@@ -123,18 +163,25 @@ class AdminProductVariantController extends Controller
             }
         }
 
-        return redirect()->route('product.variant.list')->with('status', 'thêm sản phẩm thành công');
+        return redirect()
+            ->route('product.variant.list')
+            ->with('status', 'Thêm sản phẩm thành công');
     }
 
     function edit($id)
     {
         $attributes = Attribute::where('status', 1)->get();
-        $products = Product::where('status', 1)->latest()->get();
+        $products = Product::where('status', 1)
+            ->latest()
+            ->get();
         $variant = ProductVariant::find($id);
         foreach ($variant->attributeValues as $value) {
             $check[] = $value->id;
         }
-        return view('admin.products.variants.edit', compact('variant', 'products', 'attributes', 'check'));
+        return view(
+            'admin.products.variants.edit',
+            compact('variant', 'products', 'attributes', 'check')
+        );
     }
 
     function update(ProductVariantUpdateRequest $request, $id)
@@ -150,9 +197,15 @@ class AdminProductVariantController extends Controller
         ];
         $variant = ProductVariant::find($id);
         if ($request->hasFile('feature_image_path')) {
-            $path = Str::of($variant->feature_image_path)->replace('/storage' . "/", "/");
+            $path = Str::of($variant->feature_image_path)->replace(
+                '/storage' . '/',
+                '/'
+            );
             Storage::disk('public')->delete($path); // mục đích để xóa ảnh cũ sau khi update
-            $dataFeatureImage = $this->uploadImageTrait($request->feature_image_path, 'product');
+            $dataFeatureImage = $this->uploadImageTrait(
+                $request->feature_image_path,
+                'product'
+            );
             $data['feature_image_path'] = $dataFeatureImage['file_path'];
             $data['feature_image_name'] = $dataFeatureImage['file_name'];
         }
@@ -169,11 +222,17 @@ class AdminProductVariantController extends Controller
         if ($request->hasFile('image_path')) {
             $variant->images()->delete(); // xóa các ảnh trong database trước khi update
             foreach ($variant->images as $item) {
-                $path = Str::of($item->image_path)->replace('/storage' . "/", "/");
+                $path = Str::of($item->image_path)->replace(
+                    '/storage' . '/',
+                    '/'
+                );
                 Storage::disk('public')->delete($path); // mục đích để xóa đường dẫn ảnh cũ trong storage trước khi update
             }
             foreach ($request->image_path as $image_path) {
-                $dataMultipleImage = $this->uploadImageTrait($image_path, 'product');
+                $dataMultipleImage = $this->uploadImageTrait(
+                    $image_path,
+                    'product'
+                );
                 $variant->images()->create([
                     'image_path' => $dataMultipleImage['file_path'],
                     'image_name' => $dataMultipleImage['file_name'],
@@ -181,16 +240,19 @@ class AdminProductVariantController extends Controller
             }
         }
 
-        return redirect()->route('product.variant.list')->with('status', 'Cập nhật sản phẩm thành công');
+        return redirect()
+            ->route('product.variant.list')
+            ->with('status', 'Cập nhật sản phẩm thành công');
     }
 
     function delete($id)
     {
         $variant = ProductVariant::find($id);
         $variant->delete();
-        return redirect()->route('product.variant.list')->with('status', 'Xóa tạm thời thành công');
+        return redirect()
+            ->route('product.variant.list')
+            ->with('status', 'Xóa tạm thời sản phẩm thành công');
     }
-
 
     function action(Request $request)
     {
@@ -201,21 +263,33 @@ class AdminProductVariantController extends Controller
             if ($act) {
                 if ($act == 'delete') {
                     ProductVariant::destroy($listCheck);
-                    return redirect()->route('product.variant.list')->with('status', 'Bạn đã xóa tạm thời thành công');
+                    return redirect()
+                        ->route('product.variant.list')
+                        ->with('status', 'Xóa tạm thời sản phẩm thành công');
                 }
 
-                if ($act == "restore") {
-                    ProductVariant::onlyTrashed()->whereIn('id', $listCheck)->restore();
-                    return redirect()->route('product.variant.list')->with('status', 'Bạn đã khôi phục thành công');
+                if ($act == 'restore') {
+                    ProductVariant::onlyTrashed()
+                        ->whereIn('id', $listCheck)
+                        ->restore();
+                    return redirect()
+                        ->route('product.variant.list')
+                        ->with('status', 'Khôi phục sản phẩm thành công');
                 }
 
-                if ($act == "forceDelete") {
+                if ($act == 'forceDelete') {
                     foreach ($listCheck as $id) {
                         $variant = ProductVariant::onlyTrashed()->find($id);
-                        $path = Str::of($variant->feature_image_path)->replace('/storage' . "/", "/");
+                        $path = Str::of($variant->feature_image_path)->replace(
+                            '/storage' . '/',
+                            '/'
+                        );
                         Storage::disk('public')->delete($path);
                         foreach ($variant->images as $item) {
-                            $path = Str::of($item->image_path)->replace('/storage' . "/", "/");
+                            $path = Str::of($item->image_path)->replace(
+                                '/storage' . '/',
+                                '/'
+                            );
                             Storage::disk('public')->delete($path); // mục đích để xóa đường dẫn ảnh cũ trong storage trước khi update
                         }
 
@@ -224,13 +298,19 @@ class AdminProductVariantController extends Controller
                         $variant->forceDelete();
                     }
 
-                    return redirect()->route('product.variant.list')->with('status', 'Bạn đã xóa vĩnh viễn thành công');
+                    return redirect()
+                        ->route('product.variant.list')
+                        ->with('status', 'Xóa vĩnh viễn sản phẩm thành công');
                 }
             } else {
-                return redirect()->back()->with('error', 'Bạn cần chọn tác vụ để thực hiện');
+                return redirect()
+                    ->back()
+                    ->with('error', 'Bạn cần chọn tác vụ để thực hiện');
             }
         } else {
-            return redirect()->back()->with('error', 'Bạn chưa chọn bản ghi để thực hiện');
+            return redirect()
+                ->back()
+                ->with('error', 'Bạn chưa chọn bản ghi để thực hiện');
         }
     }
 }

@@ -151,7 +151,7 @@
                                                                 <a href="{{ route('product.variant.delete', ['id' => $variant->id]) }}"
                                                                     class="btn btn-danger btn-sm rounded-0 text-white " type="button"
                                                                     data-toggle="tooltip" data-placement="top" title="Delete"
-                                                                    onclick="return confirm('bạn có chắc muốn xóa sản phẩm này')">
+                                                                    onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này')">
                                                                     <i class="fa fa-trash"></i>
                                                                 </a>
                                                             @endcan

@@ -25,19 +25,12 @@ class ProductVariantAddRequest extends FormRequest
     {
         return [
             'product_id' => 'required',
-            'price' => 'required',
-            'quantity' => 'required',
+            'price' => 'required|numeric',
+            'quantity' => 'required|numeric',
             'attribute_value_id' => 'required',
-            'image_path' => 'required|mimes:jpg,png,gif,jpeg,webp|max:10000',
-            "image_path"    => [
-                'required',
-                'array', 
-            ],
-            "image_path.*"  => [
-                'required',
-                'mimes:jpg,png,gif,jpeg,webp',
-            ],
             'feature_image_path' => 'required|mimes:jpg,png,gif,jpeg,webp',
+            'image_path' => ['required', 'array'],
+            'image_path.*' => ['required', 'mimes:jpg,png,gif,jpeg,webp'],
         ];
     }
 
@@ -45,12 +38,19 @@ class ProductVariantAddRequest extends FormRequest
     {
         return [
             'product_id.required' => 'Chọn tên sản phẩm ',
+            
             'price.required' => 'Nhập giá sản phẩm',
+            'price.numeric' => 'Giá trị nhập vào phải là số',
+            
             'quantity.required' => 'Nhập số lượng sản phẩm',
+            'quantity.numeric' => 'Giá trị nhập vào phải là số',
+
             'feature_image_path.required' => 'Chọn ảnh đại diện',
+            'feature_image_path.mimes' => 'Ảnh phải thuộc định dạng jpg,png,gif,jpeg,webp',
+            
             'image_path.required' => 'Chọn ảnh chi tiết',
             'image_path.*.mimes' => 'Ảnh phải thuộc định dạng jpg,png,gif,jpeg,webp',
-            'feature_image_path.mimes' => 'Ảnh phải thuộc định dạng jpg,png,gif,jpeg,webp',
+            
             'attribute_value_id.required' => 'Chọn một trong các thuộc tính cần thiết',
         ];
     }

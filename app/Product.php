@@ -43,20 +43,20 @@ class Product extends Model
     
     function user()
     {
-        return $this->belongsTo('App\User', 'user_id');
+        return $this->belongsTo('App\User', 'user_id')->withTrashed();
     }
 
     function categorieProduct()
     {
-        return $this->belongsTo('App\CategoryProduct', 'category_product_id');
+        return $this->belongsTo('App\CategoryProduct', 'category_product_id')->withTrashed();
     }
 
     function variants()
     {
-        return $this->hasMany('App\ProductVariant', 'product_id');
+        return $this->hasMany('App\ProductVariant', 'product_id')->withTrashed();
     }
     
     function ratings(){
-        return $this->hasMany('App\Rating','product_id');
+        return $this->hasMany('App\Rating','product_id')->withTrashed();
     }
 }

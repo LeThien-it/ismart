@@ -29,6 +29,11 @@
                                             <small>{{ $message }}</small>
                                         </div>
                                     @enderror
+                                    @error('image_path.*')
+                                        <div class="text-danger">
+                                            <small>{{ $message }}</small>
+                                        </div>
+                                    @enderror
 
                                 </div>
                                 <input type="submit" name="btn_add" class="btn btn-primary mt-3" value="Thêm mới">
@@ -71,9 +76,9 @@
 
                             <input type="submit" value="Tìm kiếm" name="search" class="btn btn-primary">
                         </form>
-
-
                     </div>
+
+
                     <div class="card-body">
                         <div class="analytic">
                             <a href="{{ route('product.image.list', ['id' => $id, 'kind' => 'active']) }}"
@@ -147,7 +152,7 @@
                                                                 <a href="{{ route('product.image.delete', ['id' => $image->id]) }}"
                                                                     class="btn btn-danger btn-sm rounded-0 text-white"
                                                                     type="button" data-toggle="tooltip" data-placement="top"
-                                                                    onclick="return confirm('bạn có chắc muốn xóa bản ghi này không')"
+                                                                    onclick="return confirm('Bạn có chắc muốn xóa hình ảnh này không')"
                                                                     title="Delete">
                                                                     <i class="fa fa-trash"></i>
                                                                 </a>
