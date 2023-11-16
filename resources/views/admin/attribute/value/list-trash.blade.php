@@ -16,8 +16,10 @@
                                 @csrf
                                 <div class="col-12 clearfix px-0">
                                     <div class="form-group col-6 float-left pl-0">
-                                        <label for="name">Tên thuộc tính</label>
-                                        <select class="form-control" name="attribute_id" id="">
+                                        <h6>
+                                            <label>Tên thuộc tính:</label>
+                                        </h6>
+                                        <select class="form-control" name="attribute_id">
                                             <option value="">Chọn</option>
                                             @foreach ($attributes as $attribute)
                                                 <option value="{{ $attribute->id }}">{{ $attribute->name }}</option>
@@ -31,9 +33,10 @@
                                     </div>
 
                                     <div class="form-group col-6 float-right pr-0">
-                                        <label for="value">Giá trị</label>
-                                        <input class="form-control" type="text" name="value" id="value"
-                                            value="{{ old('value') }}">
+                                        <h6>
+                                            <label>Giá trị:</label>
+                                        </h6>
+                                        <input class="form-control" type="text" name="value" value="{{ old('value') }}">
                                         @error('value')
                                             <div class="text-danger">
                                                 <small>{{ $message }}</small>
@@ -60,8 +63,7 @@
                             <div class="form-group mr-2">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <select class="input-group-text bg-white font-weight-custom" name="field"
-                                            id="">
+                                        <select class="input-group-text bg-white" name="field" style=" outline: 0">
                                             @foreach ($list_field as $field => $nameField)
                                                 <option {{ request()->field == $field ? 'selected' : '' }}
                                                     value="{{ $field }}">

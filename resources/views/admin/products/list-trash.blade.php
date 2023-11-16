@@ -11,7 +11,7 @@
                     <div class="form-group mr-2">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <select class="input-group-text bg-white font-weight-custom" name="field" id="">
+                                <select class="input-group-text bg-white" name="field" style=" outline: 0">
                                     @foreach ($list_field as $field => $nameField)
                                         <option {{ request()->field == $field ? 'selected' : '' }}
                                             value="{{ $field }}">
@@ -99,7 +99,7 @@
                                             </td>
                                             <td scope="row">{{ $product->id }}</td>
                                             <td>{{ $product->name }}</td>
-                                            <td>{{ optional($product->categorieProduct)->name }} </td>
+                                            <td>{{ optional($product->categoryProduct)->name }} </td>
                                             <td>{{ $product->user->name }}</td>
                                             <td>{{ date('d/m/Y', strtotime($product->created_at)) }}</td>
                                         </tr>

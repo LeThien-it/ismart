@@ -61,7 +61,6 @@ function getProductFilter($sort, $catId)
             'product_variants.feature_image_path',
             'product_variants.price',
             'product_variants.price_old',
-            'product_variants.discount',
             'product_variants.quantity',
             'product_variants.created_at'
         )
@@ -81,9 +80,6 @@ function getProductFilter($sort, $catId)
                 })
                 ->when('featured' == $sort, function ($query) {
                     $query->where('featured', 1);
-                })
-                ->when('discount' == $sort, function ($query) {
-                    $query->where('discount', '!=', 'null');
                 });
         })
         ->paginate(8);
@@ -115,7 +111,6 @@ function getProductFilterArray($priceArray, $sort, $catId)
             'product_variants.feature_image_path',
             'product_variants.price',
             'product_variants.price_old',
-            'product_variants.discount',
             'product_variants.quantity',
             'product_variants.created_at'
         )
@@ -136,9 +131,6 @@ function getProductFilterArray($priceArray, $sort, $catId)
                 })
                 ->when('featured' == $sort, function ($query) {
                     $query->where('featured', 1);
-                })
-                ->when('discount' == $sort, function ($query) {
-                    $query->where('discount', '!=', 'null');
                 });
         })
         ->paginate(8);
@@ -219,7 +211,8 @@ function showProductHome($slug)
             $catIds[] = $v->id;
         }
     }
-    $product = Product::join('product_variants', function ($join) use (
+    $product = Product::where('featured', 1)
+    ->join('product_variants', function ($join) use (
         $catIds
     ) {
         $join
@@ -283,4 +276,5 @@ function form_filter($option, $text)
 
     return $html;
 }
+
 

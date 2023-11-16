@@ -14,17 +14,16 @@
                 <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label for="title">Tiêu đề bài viết</label>
-                        <input class="form-control" type="text" name="title" id="title"
-                            value="{{ old('title') }}">
+                        <h6>
+                            <label>Tiêu đề bài viết:</label>
+                        </h6>
+                        <input class="form-control" type="text" name="title" value="{{ old('title') }}">
                         @error('title')
                             <div class="text-danger">
                                 <small>{{ $message }}</small>
                             </div>
                         @enderror
                     </div>
-
-
 
                     <div class="form-group">
                         <label for="upload-photo" class="btn btn-success">Tải ảnh lên</label>
@@ -39,11 +38,11 @@
                         @enderror
                     </div>
 
-
-
                     <div class="form-group">
-                        <label for="tinymce">Mô tả ngắn:</label>
-                        <textarea name="desc" class="form-control content-tiny" id="tinymce" cols="30" rows="10">{{ old('desc') }}</textarea>
+                        <h6>
+                            <label>Mô tả ngắn:</label>
+                        </h6>
+                        <textarea name="desc" class="form-control content-tiny" cols="30" rows="10">{{ old('desc') }}</textarea>
                         @error('desc')
                             <div class="text-danger">
                                 <small>{{ $message }}</small>
@@ -52,7 +51,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="tinymce">Nội dung bài viết:</label>
+                        <h6>
+                            <label for="tinymce">Nội dung bài viết:</label>
+                        </h6>
                         <textarea name="content" class="form-control content-tiny" id="tinymce" cols="30" rows="15">{{ old('content') }}</textarea>
                         @error('content')
                             <div class="text-danger">
@@ -61,9 +62,10 @@
                         @enderror
                     </div>
 
-
                     <div class="form-group">
-                        <label for="">Danh mục</label>
+                        <h6>
+                            <label>Danh mục:</label>
+                        </h6>
                         <select class="form-control js-select-2" name="category_id">
                             <option value="">Chọn danh mục</option>
                             @foreach ($htmlOption as $k => $v)
@@ -76,7 +78,6 @@
                             </div>
                         @enderror
                     </div>
-
 
                     <div class="form-group">
                         <h6>Trạng thái:</h6>
@@ -95,9 +96,6 @@
                             </label>
                         </div>
                     </div>
-
-
-
 
                     <button type="submit" class="btn btn-primary">Thêm mới</button>
                 </form>

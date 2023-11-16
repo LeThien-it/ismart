@@ -27,15 +27,15 @@
                                     <h3>{!! $slider->title !!}</h3>
                                 </div>
                             @endforeach
-                            
+
                         </div>
                     </div>
                     <!-- Banner hot -->
                     <div class="slider-content-right col-lg-4 col-md-4 col-12">
-                        @foreach ($banner_subs as$banner_sub )
-                        <div class="img">
-                            <img class="img-fluid" src="{{ asset($banner_sub->image_path) }}" alt="" />
-                        </div>
+                        @foreach ($banner_subs as $banner_sub)
+                            <div class="img">
+                                <img class="img-fluid" src="{{ asset($banner_sub->image_path) }}" alt="" />
+                            </div>
                         @endforeach
                     </div>
                     <!-- End -->
@@ -88,11 +88,20 @@
             </div>
             <section>
                 <div class="product-area mt-4">
-                    @include('frontend.home.components.feature-cellphone')
-                    <div class="mt-4"></div>
-                    @include('frontend.home.components.tablet-product')
-                    <div class="mt-4"></div>
-                    @include('frontend.home.components.laptop-product')
+                    @foreach ($catProductParent as $cat)
+                        @php
+                            $list_products = showProductHome($cat->slug);
+                            $text = '';
+                        @endphp
+                        @if ($loop->first)
+                            @php
+                                $text = ' nổi bật';
+                            @endphp
+                        @endif
+                        @include('frontend.home.components.product')
+                        <div class="mt-4"></div>
+                    @endforeach
+                   
                 </div>
             </section>
 

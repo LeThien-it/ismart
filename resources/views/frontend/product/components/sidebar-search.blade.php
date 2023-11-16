@@ -2,8 +2,8 @@
     <div class="section pr-3" id="filter-product-wp">
         <div class="section-detail card p-2">
             <div class="form-group">
-                <label class="h6" for="">Hãng sản xuất</label>
-                @foreach ($brandFilter->childrenCategorys as $brandChild)
+                <label class="h6" for="">Danh mục sản phẩm</label>
+                @foreach ($brands as $brandChild)
                     <div class="form-check">
                         <input class="form-check-input brand" type="checkbox" name="r_brand[]"
                             id="{{ $brandChild->name }}" value="{{ $brandChild->id }}"
@@ -12,14 +12,11 @@
                         @else {{ '' }} @endif
                         >
                         <label class="form-check-label" for="{{ $brandChild->name }}">
-                              @if ($brand->parentCategory)
-                                {{ str_replace($brand->parentCategory->name, '', $brandChild->name) }}
-                            @else
-                                {{ str_replace($brand->name, '', $brandChild->name) }}
-                            @endif
+                             {{ $brandChild->name }}
                         </label>
                     </div>
                 @endforeach
+                <input type="hidden" name="key" value="{{ request()->key }}">
             </div>
             <hr>
 

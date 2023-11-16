@@ -19,7 +19,7 @@ class CreateCategoryProductsTable extends Migration
             $table->integer('parent_id')->default(0);
             $table->foreignId('user_id');
             $table->tinyInteger('position')->nullable();
-            $table->string('class')->nullable();
+            $table->string('class_icon')->nullable();
             $table->string('slug');
             $table->timestamps();
             $table->softDeletes();

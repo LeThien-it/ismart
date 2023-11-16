@@ -35,9 +35,9 @@ class AdminRoleController extends Controller
                 'restore' => 'Khôi phục',
                 'forceDelete' => 'Xóa vĩnh viễn'
             ];
-            $roles = Role::onlyTrashed()->paginate(4);
+            $roles = Role::onlyTrashed()->paginate(5);
         } else {
-            $roles = Role::latest()->paginate(8);
+            $roles = Role::latest()->paginate(5);
 
             $list_act = [
                 'delete' => 'Xóa tạm thời'
@@ -45,13 +45,13 @@ class AdminRoleController extends Controller
             $field = $request->field;
             $keyword = $request->input('keyword');
             if ($keyword) {
-                $roles = Role::where($field, 'like', '%' . $keyword . '%')->paginate(8);
+                $roles = Role::where($field, 'like', '%' . $keyword . '%')->paginate(5);
             }
 
             $keyword1 = $request->input('keyword1');
 
             if ($keyword1) {
-                $roles = Role::where($field, 'like', '%' . $keyword1 . '%')->onlyTrashed()->paginate(8);
+                $roles = Role::where($field, 'like', '%' . $keyword1 . '%')->onlyTrashed()->paginate(5);
                 $list_act = [
                     'restore' => 'Khôi phục',
                     'forceDelete' => 'Xóa vĩnh viễn'
@@ -105,7 +105,7 @@ class AdminRoleController extends Controller
     {
         $role = Role::find($id);
         $role->delete();
-        return redirect()->back()->with('status', 'Xóa tạm thời thành công');
+        return redirect()->back()->with('status', 'Xóa tạm thời nhóm quyền thành công');
     }
 
     function action(Request $request)
@@ -116,12 +116,12 @@ class AdminRoleController extends Controller
             if ($act) {
                 if ($act == 'delete') {
                     Role::destroy($listCheck);
-                    return redirect()->route('role.list')->with('status', 'Bạn đã xóa tạm thời thành công');
+                    return redirect()->route('role.list')->with('status', 'Xóa tạm thời nhóm quyền thành công');
                 }
 
                 if ($act == "restore") {
                     Role::onlyTrashed()->whereIn('id',$listCheck)->restore();
-                    return redirect()->route('role.list')->with('status', 'Bạn đã khôi phục thành công');
+                    return redirect()->route('role.list')->with('status', 'Khôi phục nhóm quyền thành công');
                 }
 
                 if ($act == "forceDelete") {
@@ -132,7 +132,7 @@ class AdminRoleController extends Controller
                         $role->forceDelete();
                     }
                     
-                    return redirect()->route('role.list')->with('status', 'Bạn đã xóa vĩnh viễn thành công');
+                    return redirect()->route('role.list')->with('status', 'Xóa vĩnh viễn nhóm quyền thành công');
                 }
             } else {
                 return redirect()->back()->with('error', 'Bạn cần chọn tác vụ để thực hiện');

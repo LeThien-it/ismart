@@ -10,6 +10,7 @@ use App\ProductVariant;
 use App\Rating;
 use App\Slider;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ProductController extends Controller
 {
@@ -38,18 +39,17 @@ class ProductController extends Controller
             '13t' => [13000000, 1000000000],
         ];
 
-        if (!empty($request->sort)) {
-            $sort = $request->sort;
-        } else {
-            $sort = 'latest';
-        }
+        $sort = !empty($request->sort) ? $request->sort : 'latest';
 
         if ($request->r_price || $request->r_brand) {
             $price = $request->r_price;
             $brand_request = $request->r_brand;
 
             if ($brand_request) {
-                $brand_get = CategoryProduct::whereIn('id', $brand_request)->get();
+                $brand_get = CategoryProduct::whereIn(
+                    'id',
+                    $brand_request
+                )->get();
                 foreach ($brand_get as $item) {
                     $catId[] = $item->id;
                     if ($item->childrenCategorys->count() > 0) {
@@ -62,9 +62,9 @@ class ProductController extends Controller
                 if ($brand->childrenCategorys->count() > 0) {
                     foreach ($brand->childrenCategorys as $item) {
                         $catId[] = $item->id;
-                        if($item->childrenCategorys){
-                            foreach($item->childrenCategorys as $item1){
-                                $catId[]=$item1->id;
+                        if ($item->childrenCategorys) {
+                            foreach ($item->childrenCategorys as $item1) {
+                                $catId[] = $item1->id;
                             }
                         }
                     }
@@ -72,7 +72,7 @@ class ProductController extends Controller
                     $catId[] = $brand->id;
                 }
             }
-            
+
             if ($price) {
                 foreach ($priceFilter as $key => $value) {
                     if ($key == $price) {
@@ -99,7 +99,10 @@ class ProductController extends Controller
                 $products = getProductFilter($sort, [$brand->id]);
             }
         }
-        return view('frontend.product.category-product', compact('banner', 'products', 'brand', 'brandFilter'));
+        return view(
+            'frontend.product.category-product',
+            compact('banner', 'products', 'brand', 'brandFilter')
+        );
     }
 
     function detail(Request $request)
@@ -115,21 +118,25 @@ class ProductController extends Controller
             $id = $request->code;
             $product_id = ProductVariant::find($id)->product->id;
         }
-        $allProductCat = Product::where('category_product_id', $pro_cat_id)->get();
+        $allProductCat = Product::where(
+            'category_product_id',
+            $pro_cat_id
+        )->get();
 
         foreach ($allProductCat as $pro) {
             foreach ($pro->variants as $item) {
-                if ($item->attributeValues)
+                if ($item->attributeValues) {
                     foreach ($item->attributeValues as $i2) {
                         if (strtolower($i2->attribute->name) == 'bộ nhớ') {
-                            $arr[$item->id]['memory'] =  $i2->value;
+                            $arr[$item->id]['memory'] = $i2->value;
                         }
                         if (strtolower($i2->attribute->name) == 'màu sắc') {
                             $arr[$item->id]['color'] = $i2->value;
                         }
-                        $arr[$item->id]['code'] =  $item->id;
-                        $arr[$item->id]['productSlug'] =  $pro->slug;
+                        $arr[$item->id]['code'] = $item->id;
+                        $arr[$item->id]['productSlug'] = $pro->slug;
                     }
+                }
             }
         }
         // dd($arr);
@@ -150,21 +157,29 @@ class ProductController extends Controller
         //review star
         $ratings = Rating::where([
             ['product_id', '=', $product_id],
-            ['status', 1]
-        ])->with('customer:id,name')->orderByDesc('id')->paginate(4);
+            ['status', 1],
+        ])
+            ->with('customer:id,name')
+            ->orderByDesc('id')
+            ->paginate(4);
 
         if ($request->ajax()) {
-            $html = view('frontend.include.include_list_rating', compact('ratings'))->render();
+            $html = view(
+                'frontend.include.include_list_rating',
+                compact('ratings')
+            )->render();
             return response(['html' => $html]);
         }
 
         $ratingDashboards = Rating::where([
             ['product_id', '=', $product_id],
-            ['status', 1]
-        ])->select(DB::raw('count(num_star) as rating_count'))
+            ['status', 1],
+        ])
+            ->select(DB::raw('count(num_star) as rating_count'))
             ->addSelect('num_star')
             ->groupBy('num_star')
-            ->get()->toArray();
+            ->get()
+            ->toArray();
 
         $rating_total = 0;
         $ratingDefault = $this->mapRatingDefault();
@@ -195,25 +210,43 @@ class ProductController extends Controller
             }
         }
 
-        $sameCats = Product::whereIn('category_product_id', $catIds)->join('product_variants', function ($join) use ($request) {
-            $join->on('products.id', '=', 'product_variants.product_id')
-                ->where([
-                    ['product_variants.display_style', '=', 1],
-                    ['product_variants.id', '!=', $request->code],
-                ]);
-        })->select(
-            'products.id',
-            'products.slug',
-            'products.name',
-            'product_variants.id as variant_id',
-            'product_variants.price',
-            'product_variants.price_old',
-            'product_variants.feature_image_path',
-            'product_variants.id as variant_id',
-        )->get();
+        $sameCats = Product::whereIn('category_product_id', $catIds)
+            ->join('product_variants', function ($join) use ($request) {
+                $join
+                    ->on('products.id', '=', 'product_variants.product_id')
+                    ->where([
+                        ['product_variants.display_style', '=', 1],
+                        ['product_variants.id', '!=', $request->code],
+                    ]);
+            })
+            ->select(
+                'products.id',
+                'products.slug',
+                'products.name',
+                'product_variants.id as variant_id',
+                'product_variants.price',
+                'product_variants.price_old',
+                'product_variants.feature_image_path',
+                'product_variants.id as variant_id'
+            )
+            ->get();
         // dd($sameCat);
         // dd($product);
-        return view('frontend.product.detail-product', compact('product', 'memorys', 'arr', 'productSlugs', 'ratings', 'ratingDefault', 'rating_total', 'avgStar', 'sameCats', 'cat'));
+        return view(
+            'frontend.product.detail-product',
+            compact(
+                'product',
+                'memorys',
+                'arr',
+                'productSlugs',
+                'ratings',
+                'ratingDefault',
+                'rating_total',
+                'avgStar',
+                'sameCats',
+                'cat'
+            )
+        );
     }
 
     //Hàm mapRatingDefault để gán giá trị mặc định cho thanh progress bar star , để khi đánh giá bằng 0 thì vẫn hiển thị cho người dùng biết
@@ -231,9 +264,19 @@ class ProductController extends Controller
 
     function search(Request $request)
     {
+        $sort = !empty($request->sort) ? $request->sort : 'latest';
+        $ids = [];
+        $products = Product::where(
+            'name',
+            'LIKE',
+            '%' . $request->key . '%'
+        )->get();
+        foreach ($products as $product) {
+            $ids[] = $product->categoryProduct->ultimateParent()->id;
+        }
+        $ids = array_values(array_unique($ids));
         $product_arr = [];
-        $brands = CategoryProduct::where('parent_id', 0)->get();
-
+        $brands = CategoryProduct::whereIn('id', $ids)->get();
         $products = ProductVariant::select(
             'products.id',
             'products.name',
@@ -244,14 +287,32 @@ class ProductController extends Controller
             'product_variants.feature_image_path',
             'product_variants.price',
             'product_variants.price_old',
-            'product_variants.discount',
             'product_variants.quantity',
-            'product_variants.created_at',
+            'product_variants.created_at'
         )
             ->join('products', function ($join) use ($request) {
-                $join->on('product_variants.product_id', '=', 'products.id')->where('name', 'like', '%' . $request->key . '%');
-            })->where(function ($q) {
-                $q->where('display_style', '=', 1)->orWhere('show_search', 1);
+                $join
+                    ->on('product_variants.product_id', '=', 'products.id')
+                    ->where('name', 'like', '%' . $request->key . '%');
+            })
+            ->where(function ($q) {
+                $q->where('display_style', '=', 1)->Where('show_search', 1);
+            })
+            ->whereNull('products.deleted_at')
+            ->when($sort, function ($query, $sort) {
+                $query
+                    ->when('high-to-low' == $sort, function ($query) {
+                        $query->orderBy('price', 'desc');
+                    })
+                    ->when('low-to-high' == $sort, function ($query) {
+                        $query->orderBy('price', 'asc');
+                    })
+                    ->when('latest' == $sort, function ($query) {
+                        $query->latest();
+                    })
+                    ->when('featured' == $sort, function ($query) {
+                        $query->where('featured', 1);
+                    });
             })
             ->get();
 
@@ -263,28 +324,22 @@ class ProductController extends Controller
             '13t' => [13000000, 10000000000],
         ];
 
-
-        // dd($request->key);
         if ($request->r_price || $request->r_brand) {
             $price = $request->r_price;
             $brand_request = $request->r_brand;
 
             if ($brand_request) {
-                $brand_get = CategoryProduct::whereIn('id', $brand_request)->get();
+                $brand_get = CategoryProduct::whereIn(
+                    'id',
+                    $brand_request
+                )->get();
+                // dd($brand_get);
             } else {
                 $brand_get = $brands;
             }
             foreach ($brand_get as $item) {
-                foreach ($item->childrenCategorys as $v) {
-                    $catIds[] = $v->id;
-                    if ($v->childrenCategorys->count() > 0) {
-                        foreach ($v->childrenCategorys as $item2) {
-                            $catIds[] = $item2->id;
-                        }
-                    }
-                }
+                $catIds[] = $item->id;
             }
-
             if ($price) {
                 foreach ($priceFilter as $key => $value) {
                     if ($key == $price) {
@@ -295,15 +350,25 @@ class ProductController extends Controller
             } else {
                 $products = $products;
             }
-
-            foreach ($products as $item) {
-                foreach ($catIds as $catId)
-                    if ($item->category_product_id == $catId) {
-                        $product_arr[] = $item;
-                    }
-            }
-            $products = $product_arr;
+            $products = $products->filter(function ($item) use ($catIds) {
+                $catPro = CategoryProduct::find($item->category_product_id);
+                $grandParent = $catPro->ultimateParent()->id;
+                return in_array($grandParent, $catIds);
+            });
         }
+        $perPage = 8;
+
+        // Số trang hiện tại (nếu bạn cần)
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        // Tạo một LengthAwarePaginator từ Collection
+        $products = new LengthAwarePaginator(
+            $products->forPage($currentPage, $perPage), // Dữ liệu trên trang hiện tại
+            $products->count(), // Tổng số bản ghi
+            $perPage, // Số lượng bản ghi trên mỗi trang
+            $currentPage, // Trang hiện tại
+            ['path' => LengthAwarePaginator::resolveCurrentPath()]
+        );
+
         return view('frontend.product.search', compact('brands', 'products'));
     }
 
@@ -319,32 +384,49 @@ class ProductController extends Controller
             'product_variants.feature_image_path',
             'product_variants.price',
             'product_variants.price_old',
-            'product_variants.discount',
             'product_variants.quantity',
-            'product_variants.created_at',
+            'product_variants.created_at'
         )
             ->join('products', function ($join) use ($request) {
-                $join->on('product_variants.product_id', '=', 'products.id')->where('name', 'like', '%' . $request->key . '%');
-            })->where(function ($q) {
-                $q->where('display_style', '=', 1)->orWhere('show_search', 1);
+                $join
+                    ->on('product_variants.product_id', '=', 'products.id')
+                    ->where('name', 'like', '%' . $request->key . '%');
             })
-            ->latest()->paginate(5);
+            ->where(function ($q) {
+                $q->where('display_style', '=', 1)->Where('show_search', 1);
+            })
+            ->latest()
+            ->paginate(5);
 
         $txt = '<ul class="suggest_search">';
         if (count($products) > 0) {
-            $txt .= '<li class="title"><div class="viewed">Có phải bạn muốn tìm</div></li>';
+            $txt .=
+                '<li class="title"><div class="viewed">Có phải bạn muốn tìm</div></li>';
         }
         foreach ($products as $item) {
             $src_img = asset("{$item->feature_image_path}");
-            $hrefProduct = route('frontend.product.detail', ['slug' => getSlugByCatId($item->category_product_id), 'productSlug' => $item->slug, 'code' => $item->variant_id]);
-            $txt .= '<li class="product_suggest">
-                        <a href="' . $hrefProduct . '">
+            $hrefProduct = route('frontend.product.detail', [
+                'slug' => getSlugByCatId($item->category_product_id),
+                'productSlug' => $item->slug,
+                'code' => $item->variant_id,
+            ]);
+            $txt .=
+                '<li class="product_suggest">
+                        <a href="' .
+                $hrefProduct .
+                '">
                             <div class="item-img">
-                                <img src="' . $src_img . '" alt="" class="img-fluid">
+                                <img src="' .
+                $src_img .
+                '" alt="" class="img-fluid">
                             </div>
                             <div class="item-info">
-                                <h3>' . $item->name . '</h3>
-                                <strong class="price">' . number_format($item->price, 0, ',', '.') . '₫</strong>
+                                <h3>' .
+                $item->name .
+                '</h3>
+                                <strong class="price">' .
+                number_format($item->price, 0, ',', '.') .
+                '₫</strong>
                             </div>
                         </a>
                     </li>';
@@ -354,7 +436,7 @@ class ProductController extends Controller
         return json_encode([
             'code' => 200,
             'text' => $txt,
-            'message' => 'Success'
+            'message' => 'Success',
         ]);
     }
 }

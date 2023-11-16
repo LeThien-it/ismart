@@ -17,7 +17,7 @@
                                 @csrf
                                 <div class="form-group">
                                     <h6>Ảnh chi tiết:</h6>
-                                    <label for="upload-detail-image" class="btn btn-success">Tải ảnh</label>
+                                    <label class="btn btn-success">Tải ảnh</label>
                                     <span class="numFiles"></span>
                                     <input type="file" name="image_path[]" multiple class="preview_image_multiple"
                                         id="upload-detail-image" />
@@ -51,8 +51,8 @@
                             <div class="form-group mr-2">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <select class="input-group-text bg-white font-weight-custom" name="field"
-                                            id="">
+                                        <select class="input-group-text bg-white" name="field"
+                                        style=" outline: 0">
                                             @foreach ($list_field as $field => $nameField)
                                                 <option {{ request()->field == $field ? 'selected' : '' }}
                                                     value="{{ $field }}">

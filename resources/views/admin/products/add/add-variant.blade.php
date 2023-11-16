@@ -69,7 +69,7 @@
                     </div>
 
                     <div class="form-group form-row">
-                        <div class="col-6">
+                        <div class="col-4">
                             <h6><label for="price">Giá sản phẩm:</label></h6>
                             <input class="form-control" type="text" name="price" id="price"
                                 value="{{ old('price') }}">
@@ -79,7 +79,7 @@
                                 </div>
                             @enderror
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
                             <h6><label for="price_old">Giá cũ:</label></h6>
                             <input class="form-control" type="text" name="price_old" id="price_old"
                                 value="{{ old('price_old') }}">
@@ -90,9 +90,7 @@
                             @enderror
                         </div>
 
-                    </div>
-                    <div class="form-group form-row">
-                        <div class="col-6">
+                        <div class="col-4">
                             <h6><label for="quantity">Số lượng hàng:</label></h6>
                             <input class="form-control" type="text" name="quantity" id="quantity"
                                 value="{{ old('quantity') }}">
@@ -102,18 +100,9 @@
                                 </div>
                             @enderror
                         </div>
-                        <div class="col-6">
-                            <h6><label for="discount">Giảm giá <span class="text-danger">(Đơn vị %)</span>:</label></h6>
-                            <input class="form-control" type="text" name="discount" id="discount"
-                                value="{{ old('discount') }}">
-                            @error('discount')
-                                <div class="text-danger">
-                                    <small>{{ $message }}</small>
-                                </div>
-                            @enderror
-                        </div>
 
                     </div>
+
                     <div class="form-group form-row">
                         <div class="col-6">
                             <div class="form-group">

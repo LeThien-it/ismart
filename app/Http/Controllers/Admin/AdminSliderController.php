@@ -40,33 +40,33 @@ class AdminSliderController extends Controller
         ];
 
         if ($kind == 'trash') {
-            $sliders = Slider::onlyTrashed()->latest()->paginate(8);
+            $sliders = Slider::onlyTrashed()->latest()->paginate(5);
             $list_act =
                 [
                     'restore' => 'Khôi phục',
                     'forceDelete' => 'Xóa vĩnh viễn'
                 ];
         } else {
-            $sliders = Slider::latest()->paginate(8);
+            $sliders = Slider::latest()->paginate(5);
             $list_act = [
                 'delete' => 'Xóa tạm thời'
             ];
             if ($kind == 'pending') {
-                $sliders = Slider::where('status', 0)->paginate(8);
+                $sliders = Slider::where('status', 0)->paginate(5);
             }
             if ($kind == 'public') {
-                $sliders = Slider::where('status', 1)->paginate(8);
+                $sliders = Slider::where('status', 1)->paginate(5);
             }
             $field = $request->field;
             $keyword = $request->input('keyword');
             if ($keyword) {
-                $sliders = Slider::where($field, 'like', '%' . $keyword . '%')->paginate(8);
+                $sliders = Slider::where($field, 'like', '%' . $keyword . '%')->paginate(5);
             }
 
             $keyword1 = $request->input('keyword1');
 
             if ($keyword1) {
-                $sliders = Slider::where($field, 'like', '%' . $keyword1 . '%')->onlyTrashed()->paginate(8);
+                $sliders = Slider::where($field, 'like', '%' . $keyword1 . '%')->onlyTrashed()->paginate(5);
                 $list_act = [
                     'restore' => 'Khôi phục',
                     'forceDelete' => 'Xóa vĩnh viễn'
@@ -99,7 +99,7 @@ class AdminSliderController extends Controller
         ]);
 
 
-        return redirect()->route('slider.list')->with('status', 'Thêm ảnh slider thành công');
+        return redirect()->route('slider.list')->with('status', 'Thêm hình ảnh thành công');
     }
 
     function edit($id)
@@ -129,13 +129,13 @@ class AdminSliderController extends Controller
             ]);
         }
 
-        return redirect()->route('slider.list')->with('status', 'Cập nhật ảnh slider thành công');
+        return redirect()->route('slider.list')->with('status', 'Cập nhật hình ảnh thành công');
     }
 
     function delete($id)
     {
         Slider::find($id)->delete();
-        return redirect()->route('slider.list')->with('status', 'Xóa tạm thời ảnh slider thành công');
+        return redirect()->route('slider.list')->with('status', 'Xóa tạm thời hình ảnh thành công');
     }
 
     function action(Request $request)
@@ -146,11 +146,11 @@ class AdminSliderController extends Controller
             if ($act) {
                 if ($act == 'delete') {
                     Slider::destroy($listCheck);
-                    return redirect()->route('slider.list')->with('status', 'Xóa tạm thời thành công');
+                    return redirect()->route('slider.list')->with('status', 'Xóa tạm thời hình ảnh thành công');
                 }
                 if ($act == "restore") {
                     Slider::onlyTrashed()->whereIn('id', $listCheck)->restore();
-                    return redirect()->route('slider.list')->with('status', 'Khôi phục thành công');
+                    return redirect()->route('slider.list')->with('status', 'Khôi phục hình ảnh thành công');
                 }
                 if ($act == "forceDelete") {
                     foreach ($listCheck as $id) {
@@ -159,7 +159,7 @@ class AdminSliderController extends Controller
                         Storage::disk('public')->delete($path);
                         $slider->forceDelete();
                     }
-                    return redirect()->route('slider.list')->with('status', 'Xóa vĩnh viễn thành công');
+                    return redirect()->route('slider.list')->with('status', 'Xóa vĩnh viễn hình ảnh thành công');
                 }
             } else {
                 return redirect()->back()->with('error', 'Bạn cần chọn tác vụ để thực hiện');
@@ -176,6 +176,6 @@ class AdminSliderController extends Controller
         $slider->update([
             'status' => !$slider->status
         ]);
-        return redirect()->route('slider.list')->with('status', 'Cập nhật trạng thái thành công');
+        return redirect()->route('slider.list')->with('status', 'Cập nhật trạng thái hình ảnh thành công');
     }
 }

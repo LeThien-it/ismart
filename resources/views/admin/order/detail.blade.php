@@ -21,7 +21,7 @@
             </div>
 
             <div class="card-body">
-                <form action="{{ route('order.update',$order->id) }}" method="POST">
+                <form action="{{ route('order.update', $order->id) }}" method="POST">
                     @csrf
                     <div class="form-action form-inline">
                         <table class="table table-striped table-bordered table-checkall">
@@ -50,7 +50,7 @@
                                 </tr>
                                 <tr>
                                     <th scope="row" style="width:20%">Ngày tạo</th>
-                                    <td>{{ date('d-m-Y H:i:s',strtotime($order->customer->created_at)) }}</td>
+                                    <td>{{ date('d-m-Y H:i:s', strtotime($order->customer->created_at)) }}</td>
 
                                 </tr>
                                 <tr>
@@ -68,10 +68,12 @@
                             <div class="form-group ml-3">
                                 <select class="form-control mr-3" id="" name="status">
                                     <option value="">Chọn tác vụ</option>
-                                    <option value="1" {{ $order->status == 1 ? 'selected' : ''}}>Đang xử lý</option>
-                                    <option value="2" {{ $order->status == 2 ? 'selected' : ''}}>Đang giao hàng</option>
+                                    <option value="1" {{ $order->status == 1 ? 'selected' : '' }}>Đang xử lý</option>
+                                    <option value="2" {{ $order->status == 2 ? 'selected' : '' }}>Đang giao hàng
+                                    </option>
                                     <option value="3" {{ $order->status == 3 ? 'selected' : '' }}>Hoàn thành</option>
-                                    <option value="4" {{ $order->status == 4 ? 'selected' : '' }}>Hủy đơn hàng</option>
+                                    <option value="4" {{ $order->status == 4 ? 'selected' : '' }}>Hủy đơn hàng
+                                    </option>
                                 </select>
                                 <input type="submit" value="Cập nhật đơn hàng" class="btn btn-primary">
                             </div>
@@ -92,7 +94,7 @@
                 <table class="table table-striped table-bordered table-checkall mt-3">
                     <thead>
                         <tr>
-                            <th scope="col" width = "12%">Ảnh</th>
+                            <th scope="col" width="12%">Ảnh</th>
                             <th scope="col">Tên sản phẩm</th>
                             <th scope="col">Màu sắc</th>
                             <th scope="col">Đơn giá</th>
@@ -103,23 +105,22 @@
                     <tbody>
                         @foreach ($order->orderDetails as $order_detail)
                             <tr>
-                                <td><img class="img-thumbnail" src="{{ asset($order_detail->variant->feature_image_path) }}" alt=""></td>
-                                <td>{{ $order_detail->variant->product->name }}</td>
-                                @foreach ($order_detail->variant->attributeValues as $attributeValue)
-                                    @if (strtolower($attributeValue->attribute->name) == "màu sắc")
-                                        <td>{{ $attributeValue->value }}</td>
-                                    @endif
-                                @endforeach
-                                <td>{{ number_format($order_detail->variant->price, 0, '.', '.') }}đ</td>
+                                <td><img class="img-thumbnail"
+                                        src="{{ asset($order_detail->product_image) }}" alt="">
+                                </td>
+                                <td>{{ $order_detail->product_name}}</td>
+                                <td>{{ $order_detail->product_color }}</td>
+                                <td>{{ number_format($order_detail->price, 0, '.', '.') }}đ</td>
                                 <td>{{ $order_detail->qty }}</td>
-                                <td>{{ number_format($order_detail->variant->price * $order_detail->qty, 0, '.', '.') }}đ</td>
+                                <td>{{ number_format($order_detail->price * $order_detail->qty, 0, '.', '.') }}đ
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
-                           <th colspan="5" style="text-align: right;">Tổng giá trị đơn hàng:</th>
-                           <td>{{ number_format($order->total,0,'.','.') }}đ</td>      
+                            <th colspan="5" style="text-align: right;">Tổng giá trị đơn hàng:</th>
+                            <td>{{ number_format($order->total, 0, '.', '.') }}đ</td>
                         </tr>
                     </tfoot>
                 </table>

@@ -30,13 +30,13 @@ class AdminAttributeController extends Controller
         ];
 
         if ($kind == 'trash') {
-            $attributes = Attribute::onlyTrashed()->paginate(8);
+            $attributes = Attribute::onlyTrashed()->paginate(5);
             $list_act = [
                 'restore' => 'Khôi phục',
                 'forceDelete' => 'Xóa vĩnh viễn'
             ];
         } else {
-            $attributes = Attribute::latest()->paginate(8);
+            $attributes = Attribute::latest()->paginate(5);
             $list_act = [
                 'delete' => 'Xóa tạm thời'
             ];
@@ -45,12 +45,12 @@ class AdminAttributeController extends Controller
                 $field = $request->field;
                 $keyword = $request->input('keyword');
                 if ($keyword) {
-                    $attributes = Attribute::where($field, 'like', '%' . $keyword . '%')->paginate(8);
+                    $attributes = Attribute::where($field, 'like', '%' . $keyword . '%')->paginate(5);
                 }
                 $keyword1 = $request->input('keyword1');
 
                 if ($keyword1) {
-                    $attributes = Attribute::where($field, 'like', '%' . $keyword1 . '%')->onlyTrashed()->paginate(8);
+                    $attributes = Attribute::where($field, 'like', '%' . $keyword1 . '%')->onlyTrashed()->paginate(5);
                     
                     $list_act = [
                         'restore' => 'Khôi phục',

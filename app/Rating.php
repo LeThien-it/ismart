@@ -30,10 +30,10 @@ class Rating extends Model
     }
     
     function customer(){
-        return $this->belongsTo('App\Customer','customer_id');
+        return $this->belongsTo('App\Customer','customer_id')->withTrashed();
     }
 
     function product(){
-        return $this->belongsTo('App\Product','product_id');
+        return $this->belongsTo('App\Product','product_id')->withTrashed();
     }
 }

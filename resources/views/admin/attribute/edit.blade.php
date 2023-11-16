@@ -16,8 +16,10 @@
                     <div class="card-body">
                         <form action="{{ route('attribute.update', ['id' => $attribute->id]) }}" method="POST">
                             @csrf
-                            <div class="form-group col-6 pl-0">
-                                <label for="">Tên thuộc tính:</label>
+                            <div class="form-group col-6 float-left pl-0">
+                                <h6>
+                                    <label>Tên thuộc tính:</label>
+                                </h6>
                                 <input type="text" class="form-control" name="name" value="{{ $attribute->name }}">
                                 @error('name')
                                     <div class="text-danger">
@@ -26,17 +28,19 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group">
-                                <label for="">Trạng thái:</label>
+                            <div class="form-group col-6 float-right pr-0">
+                                <h6>
+                                    <label>Trạng thái:</label>
+                                </h6>
                                 <div class="form-group mt-2">
                                     <div class="form-check form-check-inline">
-                                        <input id="pending" class="form-check-input" type="radio" name="status" value="0"
-                                            {{ $attribute->status == 0 ? 'checked' : '' }}>
+                                        <input id="pending" class="form-check-input" type="radio" name="status"
+                                            value="0" {{ $attribute->status == 0 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="pending">Chờ duyệt</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input id="public" class="form-check-input" type="radio" name="status" value="1"
-                                            {{ $attribute->status == 1 ? 'checked' : '' }}>
+                                        <input id="public" class="form-check-input" type="radio" name="status"
+                                            value="1" {{ $attribute->status == 1 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="public">Công khai</label>
                                     </div>
                                 </div>

@@ -28,7 +28,7 @@
                             </div>
                             <div class="section-detail">
                                 <ul class="list-item">
-                                    @foreach ($sales as $sale)
+                                    @foreach ($bestSellingProducts as $sale)
                                         <li>
                                             <a href="{{ route('frontend.product.detail', ['slug' => getSlugByCatId($sale->product->category_product_id), 'productSlug' => $sale->product->slug, 'code' => $sale->id]) }}"
                                                 title="" class="thumb">
@@ -62,12 +62,12 @@
                         <div class="section" id="list-blog-wp">
                             <div class="section-head mb-3">
                                 <ul class="d-flex">
-                                    <li class="mr-2 {{ session('url') == true ? 'border-active' : '' }}"
+                                    <li class="mr-4 {{ session('url') == true ? 'border-active' : '' }}"
                                     >
                                         <a href="{{ route('frontend.post.show') }}" style="color: black;">Tin mới</a>
                                     </li>
                                     @foreach ($catPostLinks as $catPostLink)
-                                        <li class="mr-2 {{ request()->slug ? ($catPostLink->slug == request()->slug ? 'border-active' : '') : '' }}"
+                                        <li class="mr-4 {{ request()->slug ? ($catPostLink->slug == request()->slug ? 'border-active' : '') : '' }}"
                                         >
                                             <a href="{{ route('frontend.post.show', $catPostLink->slug) }}"
                                                 style="color: black;">{{ $catPostLink->name }}</a>

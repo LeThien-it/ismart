@@ -142,7 +142,6 @@ class AdminProductVariantController extends Controller
             'price' => $request->price,
             'price_old' => $request->price_old,
             'quantity' => $request->quantity,
-            'discount' => $request->discount,
             'display_style' => $request->display_style,
             'show_search' => $request->show_search,
         ];
@@ -191,7 +190,6 @@ class AdminProductVariantController extends Controller
             'price' => $request->price,
             'price_old' => $request->price_old,
             'quantity' => $request->quantity,
-            'discount' => $request->discount,
             'display_style' => $request->display_style,
             'show_search' => $request->show_search,
         ];

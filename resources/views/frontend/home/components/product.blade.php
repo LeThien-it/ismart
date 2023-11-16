@@ -2,37 +2,39 @@
     <div class="product-feature">
         <div class="product-top">
             <h2 class="product-title">
-                Điện thoại nổi bật
+                {{ $cat->name.$text  }}
             </h2>
             <a class="button-pill"
-                href="{{ route('frontend.product.category', ['slug' => 'dien-thoai', 'sort' => 'featured']) }}">Xem tất
+            href="{{ route('frontend.product.category', ['slug' => $cat->slug, 'sort' => 'latest']) }}">Xem tất
                 cả</a>
         </div>
+                
         <div class="list-product slider-product owl-carousel">
-            @foreach ($phone_features[1] as $phone)
+            @foreach ($list_products[1] as $product)
                 <div class="item card">
                     <a
-                        href="{{ route('frontend.product.detail', ['slug' => $phone[0]->slug, 'productSlug' => $phone->slug, 'code' => $phone->variant_id]) }}">
+                        href="{{ route('frontend.product.detail', ['slug' => $cat->slug, 'productSlug' => $product->slug, 'code' => $product->variant_id]) }}">
                         <div class="item-img">
-                            <img src="{{ asset($phone->feature_image_path) }}" alt="Tên sản phẩm" />
+                            <img src="{{ asset($product->feature_image_path) }}" alt="Tên sản phẩm" />
                         </div>
 
                         <div class="card-body p-0">
-                            <h3 class="card-title">{{ $phone->name }}</h3>
+                            <h3 class="card-title">{{ $product->name }}</h3>
 
                             <div class="box-p">
                                 <p class="price">
-                                    {{ number_format($phone->price, 0, '.', '.') . '₫' }}
+                                    {{ number_format($product->price, 0, '.', '.') . '₫' }}
                                 </p>
-                                @if ($phone->price_old)
+                                @if ($product->price_old)
                                     <p class="price-old">
-                                        {{ number_format($phone->price_old, 0, '.', '.') . '₫' }}</p>
+                                        {{ number_format($product->price_old, 0, '.', '.') . '₫' }}</p>
                                 @endif
                             </div>
-                            @if (checkRating($phone->id))
+
+                            @if (checkRating($product->id))
                                 <div class="box-rating-star">
                                     @php
-                                        $ratingStar = getRatingStar($phone->id);
+                                        $ratingStar = getRatingStar($product->id);
                                     @endphp
                                     @for ($i = 1; $i <= 5; $i++)
                                         <i class="fas fa-star {{ $i <= $ratingStar[0] ? 'active' : '' }}"></i>

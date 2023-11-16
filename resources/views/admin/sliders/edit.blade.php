@@ -8,14 +8,16 @@
             <div class="col-12 mb-3">
                 <div class="card w-50">
                     <div class="card-header font-weight-bold">
-                        Cập nhật ảnh slider
+                        Cập nhật hình ảnh quảng cáo
                     </div>
                     <div class="card-body">
                         <form action="{{ route('slider.update', ['id' => $slider->id]) }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
                             <div class="form-group pl-0">
-                                <label for="">Tiêu đề</label>
+                                <h6>
+                                    <label>Tiêu đề:</label>
+                                </h6>
                                 <input name="title" class="form-control" type="text" value="{{ $slider->title }}">
                                 @error('title')
                                     <div class="text-danger">
@@ -25,8 +27,10 @@
                             </div>
 
                             <div class="form-group pl-0">
-                                <label for="">Danh mục</label>
-                                <select class="form-control" name="cat_pro_id" id="">
+                                <h6>
+                                    <label>Danh mục:</label>
+                                </h6>
+                                <select class="form-control" name="cat_pro_id">
                                     <option value="">Chọn</option>
                                     <option value="0" {{ $slider->cat_pro_id == 0 ? 'selected' : '' }}>Trang chủ
                                     </option>
@@ -42,7 +46,9 @@
                             </div>
 
                             <div class="form-group pl-0">
-                                <label for="">Vị trí slide</label>
+                                <h6>
+                                    <label>Vị trí hình ảnh:</label>
+                                </h6>
                                 <input name="position" class="form-control" type="number" min="1"
                                     value="{{ $slider->position }}">
                                 @error('position')
@@ -54,7 +60,7 @@
 
                             <div class="d-flex justify-content-between">
                                 <div class="form-group pl-0">
-                                    <label for="">Slide thuộc khối</label>
+                                    <h6>Hình ảnh hiển thị:</h6>
                                     <div class="form-group">
                                         <div class="form-check form-check-inline">
                                             <input id="main-box" class="form-check-input" type="radio" name="box"
@@ -69,7 +75,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-6 pl-0 ">
-                                    <label for="status">Trạng thái</label>
+                                    <h6>Trạng thái:</h6>
                                     <div class="form-group">
                                         <div class="form-check form-check-inline">
                                             <input id="pending" class="form-check-input" type="radio" name="status"
@@ -87,7 +93,7 @@
                             </div>
 
                             <div class="form-group pl-0">
-                                <h6 class="lh-24px">Ảnh slider:</h6>
+                                <h6 class="lh-24px">Hình ảnh quảng cáo:</h6>
                                 <label for="upload-photo" class="btn btn-success mb-0">Tải ảnh</label>
                                 <input type="file" name="image_path" class="preview_image_detail" id="upload-photo" />
                                 <div class="image-detail">

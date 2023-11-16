@@ -9,7 +9,7 @@
                     <div class="form-group mr-2">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <select class="input-group-text bg-white font-weight-custom" name="field" id="">
+                                <select class="input-group-text bg-white" name="field" style=" outline: 0">
                                     @foreach ($list_field as $field => $nameField)
                                         <option {{ request()->field == $field ? 'selected' : '' }}
                                             value="{{ $field }}">
@@ -121,7 +121,7 @@
                                                                     class="btn btn-danger btn-sm rounded-0 text-white"
                                                                     type="button" data-toggle="tooltip" data-placement="top"
                                                                     title="Xóa"
-                                                                    onclick="return confirm('bạn có chắc muốn xóa bản ghi này không')">
+                                                                    onclick="return confirm('Bạn có chắc muốn xóa thành viên này')">
                                                                     <i class="fa fa-trash"></i>
                                                                 </a>
                                                             @endif

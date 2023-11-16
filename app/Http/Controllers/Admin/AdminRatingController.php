@@ -36,23 +36,23 @@ class AdminRatingController extends Controller
         ];
 
         if ($kind == 'trash') {
-            $ratings = Rating::onlyTrashed()->paginate(8);
+            $ratings = Rating::onlyTrashed()->paginate(5);
             $list_act = [
                 'restore' => 'Khôi phục',
                 'forceDelete' => 'Xóa vĩnh viễn'
             ];
         } else {
-            $ratings = Rating::latest()->paginate(8);
+            $ratings = Rating::latest()->paginate(5);
 
             $list_act = [
                 'delete' => 'Xóa tạm thời'
             ];
 
             if ($kind == 'approved') {
-                $ratings = Rating::where('status', 1)->paginate(8);
+                $ratings = Rating::where('status', 1)->paginate(5);
             }
             if ($kind == 'not_approved') {
-                $ratings = Rating::where('status', 0)->paginate(8);
+                $ratings = Rating::where('status', 0)->paginate(5);
             }
 
             $field = $request->field;
@@ -67,7 +67,7 @@ class AdminRatingController extends Controller
                     } else {
                         $ids[] = 0;
                     }
-                    $ratings = Rating::whereIn($field, $ids)->paginate(8);
+                    $ratings = Rating::whereIn($field, $ids)->paginate(5);
                 } elseif ($field == 'product_id') {
                     $get_id = Product::where('name', 'like', '%' . $keyword . '%')->get();
                     if (count($get_id) > 0) {
@@ -77,9 +77,9 @@ class AdminRatingController extends Controller
                     } else {
                         $ids[] = 0;
                     }
-                    $ratings = Rating::whereIn($field, $ids)->paginate(8);
+                    $ratings = Rating::whereIn($field, $ids)->paginate(5);
                 } else {
-                    $ratings = Rating::where($field, 'like', '%' . $keyword . '%')->paginate(8);
+                    $ratings = Rating::where($field, 'like', '%' . $keyword . '%')->paginate(5);
                 }
             }
             $keyword1 = $request->input('keyword1');
@@ -94,7 +94,7 @@ class AdminRatingController extends Controller
                     } else {
                         $ids[] = 0;
                     }
-                    $ratings = Rating::whereIn($field, $ids)->onlyTrashed()->paginate(8);
+                    $ratings = Rating::whereIn($field, $ids)->onlyTrashed()->paginate(5);
                 } elseif ($field == 'product_id') {
                     $get_id = Product::where('name', 'like', '%' . $keyword1 . '%')->get();
                     if (count($get_id) > 0) {
@@ -104,9 +104,9 @@ class AdminRatingController extends Controller
                     } else {
                         $ids[] = 0;
                     }
-                    $ratings = Rating::whereIn($field, $ids)->onlyTrashed()->paginate(8);
+                    $ratings = Rating::whereIn($field, $ids)->onlyTrashed()->paginate(5);
                 } else {
-                    $ratings = Rating::where($field, 'like', '%' . $keyword1 . '%')->onlyTrashed()->paginate(8);
+                    $ratings = Rating::where($field, 'like', '%' . $keyword1 . '%')->onlyTrashed()->paginate(5);
                 }
 
                 $list_act = [
@@ -123,7 +123,7 @@ class AdminRatingController extends Controller
     {
         $rating = Rating::find($id);
         $rating->delete();
-        return redirect()->route('rating.list')->with('status', 'Bạn đã xóa tạm thời thành công');
+        return redirect()->route('rating.list')->with('status', 'Xóa tạm thời đánh giá thành công');
     }
 
     function action(Request $request)
@@ -134,17 +134,17 @@ class AdminRatingController extends Controller
             if ($act) {
                 if ($act == 'delete') {
                     Rating::destroy($listCheck);
-                    return redirect()->route('rating.list')->with('status', 'Bạn đã xóa tạm thời thành công');
+                    return redirect()->route('rating.list')->with('status', 'Xóa tạm thời đánh giá thành công');
                 }
 
                 if ($act == "restore") {
                     Rating::onlyTrashed()->whereIn('id', $listCheck)->restore();
-                    return redirect()->route('rating.list')->with('status', 'Bạn đã khôi phục thành công');
+                    return redirect()->route('rating.list')->with('status', 'Khôi phục đánh giá thành công');
                 }
 
                 if ($act == "forceDelete") {
                     Rating::onlyTrashed()->whereIn('id', $listCheck)->forceDelete();
-                    return redirect()->route('rating.list')->with('status', 'Bạn đã xóa vĩnh viễn thành công');
+                    return redirect()->route('rating.list')->with('status', 'Xóa vĩnh viễn đánh giá thành công');
                 }
             } else {
                 return redirect()->back()->with('error', 'Bạn cần chọn tác vụ để thực hiện');
@@ -160,6 +160,6 @@ class AdminRatingController extends Controller
         $rating->update([
             'status' => !$rating->status
         ]);
-        return redirect()->route("rating.list")->with('status', 'Cập nhật trạng thái thuộc tính thành công');
+        return redirect()->route("rating.list")->with('status', 'Cập nhật trạng thái đánh giá thành công');
     }
 }

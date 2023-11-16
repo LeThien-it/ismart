@@ -13,7 +13,7 @@ class Order extends Model
 
     function customer()
     {
-        return $this->belongsTo('App\Customer', 'customer_id');
+        return $this->belongsTo('App\Customer', 'customer_id')->withTrashed();
     }
     function orderDetails()
     {

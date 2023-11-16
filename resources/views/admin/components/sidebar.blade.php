@@ -5,7 +5,7 @@
                 <div class="nav-link-icon d-inline-flex">
                     <i class="far fa-folder"></i>
                 </div>
-                Dashboard
+                Bảng thống kê
             </a>
         </li>
 
@@ -47,7 +47,7 @@
                     <div class="nav-link-icon d-inline-flex">
                         <i class="far fa-folder"></i>
                     </div>
-                    Slider-banners
+                    Hình ảnh quảng cáo
                 </a>
             </li>
         @endcan
@@ -106,7 +106,7 @@
                     <div class="nav-link-icon d-inline-flex">
                         <i class="far fa-folder"></i>
                     </div>
-                    Users
+                    Thành viên
                 </a>
             </li>
         @endcan

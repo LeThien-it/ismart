@@ -39,6 +39,5 @@ class AuthServiceProvider extends ServiceProvider
                 return $user->checkPermissionAccess($permission->key_code);
             });
         }
-   
     }
 }

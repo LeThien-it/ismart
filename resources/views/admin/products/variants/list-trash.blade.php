@@ -11,7 +11,7 @@
                     <div class="form-group mr-2">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <select class="input-group-text bg-white font-weight-custom" name="field" id="">
+                                <select class="input-group-text bg-white" name="field" style=" outline: 0">
                                     @foreach ($list_field as $field => $nameField)
                                         <option {{ request()->field == $field ? 'selected' : '' }}
                                             value="{{ $field }}">
@@ -102,9 +102,6 @@
                                                     @if ($variant->price_old)
                                                         <p>Giá cũ: {{ number_format($variant->price_old, 0, '.', '.') }}VNĐ
                                                         </p>
-                                                    @endif
-                                                    @if ($variant->discount)
-                                                        <p>Giảm giá: {{ $variant->discount }}%</p>
                                                     @endif
                                                     <p>Số lượng hàng: {{ $variant->quantity }}</p>
                                                     @foreach ($variant->attributeValues as $item)

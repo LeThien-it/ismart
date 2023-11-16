@@ -43,16 +43,11 @@
                             <input type="submit" value="Đăng nhập" class="form-input form-control login_btn">
                         </div>
 
-                        <div class="form-group d-md-flex">
-                            <div class="w-50">
-                                <label class="checkbox-wrap checkbox-primary">Ghi nhớ
-                                    <input type="checkbox" name="remember_me"/>
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="w-50 text-md-right">
-                                <a href="#" style="color: #fff">Quên mật khẩu</a>
-                            </div>
+                        <div class="form-group">
+                            <label class="checkbox-wrap checkbox-primary">Ghi nhớ
+                                <input type="checkbox" name="remember_me" />
+                                <span class="checkmark"></span>
+                            </label>
                         </div>
 
                         @if (Session::has('error'))

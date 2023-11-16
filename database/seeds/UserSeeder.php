@@ -14,27 +14,27 @@ class UserSeeder extends Seeder
         DB::table('permissions')->insert(
             [
                 [
-                    'name' => 'Users',
+                    'name' => 'Thành viên',
                     'key_code' => null,
                     'parent_id' => 0
                 ],
                 [
-                    'name' => 'Xem Users',
+                    'name' => 'Xem Thành viên',
                     'key_code' => 'list_user',
                     'parent_id' => 35
                 ],
                 [
-                    'name' => 'Thêm Users',
+                    'name' => 'Thêm Thành viên',
                     'key_code' => 'add_user',
                     'parent_id' => 35
                 ],
                 [
-                    'name' => 'Sửa Users',
+                    'name' => 'Sửa Thành viên',
                     'key_code' => 'edit_user',
                     'parent_id' => 35
                 ],
                 [
-                    'name' => 'Xóa Users',
+                    'name' => 'Xóa Thành viên',
                     'key_code' => 'delete_user',
                     'parent_id' => 35
                 ],

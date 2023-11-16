@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div id="main-content-wp" class="detail-blog-page">
+    <div id="main-content-wp" class="detail-blog-page pb-5">
         <div class="container">
             <div class="width-custom">
                 <div class="secion" id="breadcrumb-wp">

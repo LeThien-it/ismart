@@ -9,7 +9,7 @@
                     <div class="form-group mr-2">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <select class="input-group-text bg-white font-weight-custom" name="field" id="">
+                                <select class="input-group-text bg-white" name="field" style=" outline: 0">
                                     @foreach ($list_field as $field => $nameField)
                                         <option {{ request()->field == $field ? 'selected' : '' }}
                                             value="{{ $field }}">
@@ -106,12 +106,15 @@
                                                                 </a>
                                                             @endcan
                                                             @can('delete', $role)
-                                                                <a href="{{ route('role.delete', ['id' => $role->id]) }}"
-                                                                    class="btn btn-danger btn-sm rounded-0 text-white" type="button"
-                                                                    data-toggle="tooltip" data-placement="top" title="Delete"
-                                                                    onclick="return confirm('bạn có chắc muốn xóa bản ghi này không')">
-                                                                    <i class="fa fa-trash"></i>
-                                                                </a>
+                                                                @if ($role->id != 1)
+                                                                    <a href="{{ route('role.delete', ['id' => $role->id]) }}"
+                                                                        class="btn btn-danger btn-sm rounded-0 text-white"
+                                                                        type="button" data-toggle="tooltip" data-placement="top"
+                                                                        title="Delete"
+                                                                        onclick="return confirm('Bạn có chắc muốn xóa quyền này')">
+                                                                        <i class="fa fa-trash"></i>
+                                                                    </a>
+                                                                @endif
                                                             @endcan
                                                         </td>
                                                     @endcanany
@@ -121,7 +124,7 @@
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="7" class="bg-white">không tìm thấy bản ghi nào</td>
+                                        <td colspan="7" class="bg-white">Không tìm thấy bản ghi nào</td>
                                     </tr>
                                 @endif
                             </tbody>

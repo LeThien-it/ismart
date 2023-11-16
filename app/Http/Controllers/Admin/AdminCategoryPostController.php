@@ -27,14 +27,14 @@ class AdminCategoryPostController extends Controller
         ];
 
         if ($kind == 'trash') {
-            $catPosts = CategoryPost::onlyTrashed()->latest()->paginate(8);
+            $catPosts = CategoryPost::onlyTrashed()->latest()->paginate(5);
 
             $list_act = [
                 'restore' => 'Khôi phục',
                 'forceDelete' => 'Xóa vĩnh viễn'
             ];
         } else {
-            $catPosts = CategoryPost::latest()->paginate(8);
+            $catPosts = CategoryPost::latest()->paginate(5);
             $list_act = [
                 'delete' => 'Xóa tạm thời'
             ];
@@ -43,12 +43,12 @@ class AdminCategoryPostController extends Controller
                 $field = $request->field;
                 $keyword = $request->input('keyword');
                 if ($keyword) {
-                    $catPosts = CategoryPost::where($field, 'like', '%' . $keyword . '%')->paginate(8);
+                    $catPosts = CategoryPost::where($field, 'like', '%' . $keyword . '%')->paginate(5);
                 }
                 $keyword1 = $request->input('keyword1');
 
                 if ($keyword1) {
-                    $catPosts = CategoryPost::where($field, 'like', '%' . $keyword1 . '%')->onlyTrashed()->paginate(8);
+                    $catPosts = CategoryPost::where($field, 'like', '%' . $keyword1 . '%')->onlyTrashed()->paginate(5);
                     $list_act = [
                         'restore' => 'Khôi phục',
                         'forceDelete' => 'Xóa vĩnh viễn'

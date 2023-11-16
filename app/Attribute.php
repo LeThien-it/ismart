@@ -34,11 +34,11 @@ class Attribute extends Model
     }
     
     function user(){
-        return $this->belongsTo('App\User','user_id');
+        return $this->belongsTo('App\User','user_id')->withTrashed();
     }
 
     function values(){
-        return $this->hasMany('App\AttributeValue','attribute_id');
+        return $this->hasMany('App\AttributeValue','attribute_id')->withTrashed();
     }
 
     

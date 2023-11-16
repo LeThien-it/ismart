@@ -13,7 +13,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\Storage;
 
 class ShoppingCartController extends Controller
 {
@@ -30,24 +30,26 @@ class ShoppingCartController extends Controller
                 $color = $i->value;
             }
         }
-        Cart::add(
-            [
-                'id' => $variant->id,
-                'name' => $variant->product->name,
-                'qty' => 1,
-                'price' => $variant->price,
-                'options' =>
-                [
-                    'color' => $color,
-                    'image_path' => $variant->feature_image_path,
-                    'productSlug' => $variant->product->slug,
-                    'slug' => $slug
-                ]
-            ]
-        );
+        Cart::add([
+            'id' => $variant->id,
+            'name' => $variant->product->name,
+            'qty' => 1,
+            'price' => $variant->price,
+            'options' => [
+                'color' => $color,
+                'image_path' => $variant->feature_image_path,
+                'productSlug' => $variant->product->slug,
+                'slug' => $slug,
+            ],
+        ]);
         $src = asset($variant->feature_image_path);
         $num = Cart::count();
-        return response()->json(['code' => 200, 'src' => $src, 'name' => $variant->product->name, 'num' => $num]);
+        return response()->json([
+            'code' => 200,
+            'src' => $src,
+            'name' => $variant->product->name,
+            'num' => $num,
+        ]);
     }
 
     function update(Request $request)
@@ -64,7 +66,7 @@ class ShoppingCartController extends Controller
             'subTotal' => $subTotal,
             'total' => $total,
             'num_pro' => $num_pro,
-            'qty' => $qty
+            'qty' => $qty,
         ]);
     }
 
@@ -91,28 +93,29 @@ class ShoppingCartController extends Controller
         $uppercase_code = Str::upper($code);
         $order_code = 'ISM-' . $uppercase_code;
 
-
         $validator = Validator::make($request->all(), []);
 
-        $messsages = array(
+        $messsages = [
             'name.required' => 'nhập họ và tên',
             'email.required' => 'nhập email',
             'phone.required' => 'nhập số điện thoại',
-            'address.required' => 'nhập địa chỉ'
+            'address.required' => 'nhập địa chỉ',
+        ];
+
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'name' => 'required',
+                'email' => 'required',
+                'phone' => 'required',
+                'address' => 'required',
+            ],
+            $messsages
         );
 
-
-
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
-            'address' => 'required',
-        ], $messsages);
-
-
         if ($validator->fails()) {
-            return redirect()->back()
+            return redirect()
+                ->back()
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -132,13 +135,31 @@ class ShoppingCartController extends Controller
         ]);
 
         foreach (Cart::content() as $row) {
+            $str = $row->options['image_path'];
+            $path = str_replace('/storage/', 'public/', $str);
+            // dd($path);
+            $filename = Str::afterLast($str, '/');
+            $fileNameHash = Str::random(27) . "." . $filename;
+
+            $checkFile = "/public/order_detail/$fileNameHash";
+
+            $orderStorage = "/storage/order_detail/$fileNameHash";
+            // $files = Storage::copy($path,"public/order_detail/$filename");
+            if (!(Storage::exists($checkFile))) {
+                $files = Storage::copy($path, $checkFile);
+            }
+           
             OrderDetail::create([
                 'order_id' => $order->id,
+                'product_name' => $row->name,
+                'product_color' => $row->options['color'],
+                'product_image' => $orderStorage,
                 'product_variant_id' => $row->id,
                 'qty' => $row->qty,
-                'price' => $row->price
+                'price' => $row->price,
             ]);
         }
+        
 
         $data['info'] = $customer;
         $data['cart'] = Cart::content();

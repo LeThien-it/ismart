@@ -45,7 +45,7 @@
                         @foreach ($catProducts as $catProduct)
                             <li>
                                 <a href="{{ route('frontend.product.category', ['slug' => $catProduct->slug]) }}">
-                                    {!! optional($catProduct)->class !!}
+                                    {!! optional($catProduct)->class_icon !!}
                                     {{ $catProduct->name }}
                                 </a>
                                 @if ($catProduct->childrenCategorys->count() > 0)

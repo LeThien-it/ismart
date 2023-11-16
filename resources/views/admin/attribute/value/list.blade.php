@@ -1,7 +1,5 @@
 @extends('layouts.admin')
-@section('css')
-    <link rel="stylesheet" href="{{ asset('backend/attribute/list/list.css') }}">
-@endsection
+
 @section('content')
     <div id="content" class="container-fluid">
         <div class="row">
@@ -16,7 +14,9 @@
                                 @csrf
                                 <div class="col-12 clearfix px-0">
                                     <div class="form-group col-6 float-left pl-0">
-                                        <label for="name">Tên thuộc tính</label>
+                                        <h6>
+                                            <label>Tên thuộc tính:</label>
+                                        </h6>
                                         <select class="form-control" name="attribute_id" id="">
                                             <option value="">Chọn</option>
                                             @foreach ($attributes as $attribute)
@@ -31,8 +31,10 @@
                                     </div>
 
                                     <div class="form-group col-6 float-right pr-0">
-                                        <label for="value">Giá trị</label>
-                                        <input class="form-control" type="text" name="value" id="value"
+                                        <h6>
+                                            <label>Giá trị:</label>
+                                        </h6>
+                                        <input class="form-control" type="text" name="value"
                                             value="{{ old('value') }}">
                                         @error('value')
                                             <div class="text-danger">
@@ -44,8 +46,6 @@
                                 <div class="col-12 px-0">
                                     <input type="submit" class="btn btn-primary mt-3" value="Thêm mới">
                                 </div>
-
-
                             </form>
                         </div>
                     </div>
@@ -60,8 +60,7 @@
                             <div class="form-group mr-2">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <select class="input-group-text bg-white font-weight-custom" name="field"
-                                            id="">
+                                        <select class="input-group-text bg-white" name="field" style=" outline: 0">
                                             @foreach ($list_field as $field => $nameField)
                                                 <option {{ request()->field == $field ? 'selected' : '' }}
                                                     value="{{ $field }}">

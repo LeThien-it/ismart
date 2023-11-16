@@ -9,7 +9,7 @@
     <div id="content" class="container-fluid">
         <div class="card">
             <div class="card-header font-weight-bold">
-                Cập nhật mật khẩu người dùng
+                Cập nhật mật khẩu thành viên
             </div>
             <div class="card-body">
                 <form action="{{ route('user.updatePassword', ['id' => $user->id]) }}" method="POST">
@@ -23,8 +23,9 @@
                             </div>
                         @enderror
                     </div>
+                    
                     <div class="form-group">
-                        <label for="password">Mật khẩu:</label>
+                        <label for="password">Mật khẩu mới:</label>
                         <input class="form-control" type="password" name="new_password" id="password">
                         @error('new_password')
                             <div class="text-danger mb-1">

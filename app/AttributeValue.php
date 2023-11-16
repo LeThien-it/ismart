@@ -14,7 +14,7 @@ class AttributeValue extends Model
     ];
 
     function attribute(){
-        return $this->belongsTo('App\Attribute','attribute_id');
+        return $this->belongsTo('App\Attribute','attribute_id')->withTrashed();
     }
 
 }

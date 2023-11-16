@@ -18,10 +18,9 @@
                             @csrf
                             <div class="form-group pl-0">
                                 <h6>
-                                    <label for="name">Tên danh mục:</label>
+                                    <label>Tên danh mục:</label>
                                 </h6>
-                                <input class="form-control" type="text" name="name" value="{{ $catPost->name }}"
-                                    id="name">
+                                <input class="form-control" type="text" name="name" value="{{ $catPost->name }}">
                                 @error('name')
                                     <div class="text-danger">
                                         <small>{{ $message }}</small>
@@ -31,7 +30,7 @@
 
                             <div class="form-group pl-0">
                                 <h6>
-                                    <label for="">Danh mục cha:</label>
+                                    <label>Danh mục cha:</label>
                                 </h6>
                                 <select class="form-control js-select-2" id="" name="parent_id">
                                     <option value="0">Danh mục cha</option>
@@ -47,14 +46,12 @@
                             </div>
                             <div class="form-group col-5 pl-0">
                                 <h6>
-                                    <label for="">Vị trí menu:</label>
+                                    <label>Vị trí menu:</label>
                                 </h6>
-                                <input class="form-control" type="number" name="position" id="" min="0" max="10"
+                                <input class="form-control" type="number" name="position" min="0" max="10"
                                     value="{{ $catPost->position }}">
                             </div>
                             <input type="submit" name="btn_add" class="btn btn-primary mt-3" value="Cập nhật">
-
-
                         </form>
                     </div>
                 </div>

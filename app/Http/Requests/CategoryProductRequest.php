@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
 
 class CategoryProductRequest extends FormRequest
 {
@@ -24,7 +26,16 @@ class CategoryProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:category_products,name,' . $this->id . '',
+            // 'name' => 'required|unique:category_products,name,' . $this->id . '',
+            // 'name' => Rule::unique('category_products')->where(function ($query) {
+            //     return $query->where('parent_id', $this->parent_id);
+            // })->ignore($this->id),
+            'name' => [
+                'required',
+                Rule::unique('category_products')->where(function ($query) {
+                    return $query->where('parent_id', $this->parent_id);
+                })->ignore($this->id)
+            ],
         ];
     }
 

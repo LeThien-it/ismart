@@ -13,8 +13,10 @@
                 <form action="{{ route('page.update', ['id' => $page->id]) }}" method="POST">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Tên trang</label>
-                        <input class="form-control" type="text" name="name" id="name" value="{{ $page->name }}">
+                        <h6>
+                            <label>Tên trang:</label>
+                        </h6>
+                        <input class="form-control" type="text" name="name" value="{{ $page->name }}">
 
                         @error('name')
                             <div class="text-danger">
@@ -24,10 +26,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="tinymce">Nội dung trang</label>
-                        <textarea name="content" class="form-control content-tiny" id="tinymce" cols="30"
-                            rows="15">{{ $page->content }}</textarea>
-                            @error('content')
+                        <h6>
+                            <label>Nội dung trang:</label>
+                        </h6>
+                        <textarea name="content" class="form-control content-tiny" cols="30" rows="15">{{ $page->content }}</textarea>
+                        @error('content')
                             <div class="text-danger">
                                 <small>{{ $message }}</small>
                             </div>

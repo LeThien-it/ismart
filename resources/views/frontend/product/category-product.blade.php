@@ -88,8 +88,6 @@
                                                     <option value="">Sắp xếp</option>
                                                     {!! form_filter('latest', 'Mới nhất') !!}
 
-                                                    {!! form_filter('discount', 'Giảm giá') !!}
-
                                                     {!! form_filter('high-to-low', 'Giá cao xuống thấp') !!}
 
                                                     {!! form_filter('low-to-high', 'Giá thấp lên cao') !!}

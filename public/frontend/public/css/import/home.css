@@ -50,6 +50,7 @@
   display: table;
   height: 48px;
   margin: 0 auto;
+  padding: 0 5px;
 }
 
 #sync2 .item h3 {

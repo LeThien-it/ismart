@@ -21,7 +21,7 @@
                                         <h6>
                                             <label>Tên danh mục:</label>
                                         </h6>
-                                        <input class="form-control" type="text" name="name" id="name">
+                                        <input class="form-control" type="text" name="name">
                                         @error('name')
                                             <div class="text-danger">
                                                 <small>{{ $message }}</small>
@@ -34,7 +34,7 @@
                                             <label>Danh mục cha:</label>
                                         </h6>
 
-                                        <select class="form-control js-select-2" id="" name="parent_id">
+                                        <select class="form-control js-select-2" name="parent_id">
                                             <option value="0">Danh mục cha</option>
                                             @foreach ($htmlOption as $key => $item)
                                                 <option value="{{ $key }}">{{ $item }}</option>
@@ -65,8 +65,7 @@
                             <div class="form-group mr-2">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <select class="input-group-text bg-white font-weight-custom" name="field"
-                                            id="">
+                                        <select class="input-group-text bg-white" name="field" style=" outline: 0">
                                             @foreach ($list_field as $field => $nameField)
                                                 <option {{ request()->field == $field ? 'selected' : '' }}
                                                     value="{{ $field }}">

@@ -19,7 +19,6 @@ class CreateProductVariantsTable extends Migration
             $table->string('feature_image_name');
             $table->integer('price');
             $table->string('price_old')->nullable();
-            $table->string('discount')->nullable();
             $table->string('quantity');
             $table->foreignId('product_id');
             $table->tinyInteger('display_style')->default(0);

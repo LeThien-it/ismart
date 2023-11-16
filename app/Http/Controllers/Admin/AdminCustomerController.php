@@ -72,10 +72,7 @@ class AdminCustomerController extends Controller
                 );
             }
         }
-        return view(
-            'admin.customers.list',
-            compact('customers', 'list_field', 'list_act', 'count')
-        );
+        return view('admin.customers.list',compact('customers', 'list_field', 'list_act', 'count'));
     }
 
     function delete($id)

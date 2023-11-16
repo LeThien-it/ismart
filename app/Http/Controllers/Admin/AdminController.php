@@ -15,7 +15,7 @@ class AdminController extends Controller
 {
     public function login()
     {
-        // dd(Hash::make('12345678'));
+        // dd(Hash::make('1'));
         if (Auth::check()) {
             return redirect()->route('dashboard.show');
         }

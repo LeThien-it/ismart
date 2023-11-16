@@ -46,7 +46,7 @@ class Product extends Model
         return $this->belongsTo('App\User', 'user_id')->withTrashed();
     }
 
-    function categorieProduct()
+    function categoryProduct()
     {
         return $this->belongsTo('App\CategoryProduct', 'category_product_id')->withTrashed();
     }

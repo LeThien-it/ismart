@@ -32,14 +32,14 @@ class AdminAttributeValueController extends Controller
         ];
 
         if ($kind == 'trash') {
-            $attributeValues = AttributeValue::onlyTrashed()->paginate(8);
+            $attributeValues = AttributeValue::onlyTrashed()->paginate(5);
             $list_act =
                 [
                     'restore' => 'Khôi phục',
                     'forceDelete' => 'Xóa vĩnh viễn'
                 ];
         } else {
-            $attributeValues = AttributeValue::latest()->paginate(8);
+            $attributeValues = AttributeValue::latest()->paginate(5);
             $list_act = [
                 'delete' => 'Xóa tạm thời'
             ];
@@ -57,9 +57,9 @@ class AdminAttributeValueController extends Controller
                         } else {
                             $ids[] = 0;
                         }
-                        $attributeValues = AttributeValue::whereIn($field, $ids)->paginate(8);
+                        $attributeValues = AttributeValue::whereIn($field, $ids)->paginate(5);
                     } else {
-                        $attributeValues = AttributeValue::where($field, 'like', '%' . $keyword . '%')->paginate(8);
+                        $attributeValues = AttributeValue::where($field, 'like', '%' . $keyword . '%')->paginate(5);
                     }
                 }
                 $keyword1 = $request->input('keyword1');
@@ -75,9 +75,9 @@ class AdminAttributeValueController extends Controller
                             $ids[] = 0;
                         }
                         
-                        $attributeValues = AttributeValue::whereIn($field, $ids)->onlyTrashed()->paginate(8);
+                        $attributeValues = AttributeValue::whereIn($field, $ids)->onlyTrashed()->paginate(5);
                     } else {
-                        $attributeValues = AttributeValue::where($field, 'like', '%' . $keyword1 . '%')->onlyTrashed()->paginate(8);
+                        $attributeValues = AttributeValue::where($field, 'like', '%' . $keyword1 . '%')->onlyTrashed()->paginate(5);
                     }
 
                     $list_act = [

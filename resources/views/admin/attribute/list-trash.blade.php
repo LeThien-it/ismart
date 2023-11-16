@@ -16,7 +16,9 @@
                                 @csrf
                                 <div class="col-12 clearfix pl-0">
                                     <div class="form-group col-6 float-left pl-0">
-                                        <label for="name">Tên thuộc tính</label>
+                                        <h6>
+                                            <label>Tên thuộc tính:</label>
+                                        </h6>
                                         <input type="text" class="form-control" name="name" id="name">
                                         @error('name')
                                             <div class="text-danger">
@@ -26,7 +28,9 @@
                                     </div>
 
                                     <div class="form-group col-6 float-right pr-0 mb-0">
-                                        <label for="status">Trạng thái</label>
+                                        <h6>
+                                            <label>Trạng thái:</label>
+                                        </h6>
                                         <div class="form-group mt-2">
                                             <div class="form-check form-check-inline">
                                                 <input id="pending" class="form-check-input" type="radio" name="status"
@@ -58,8 +62,7 @@
                             <div class="form-group mr-2">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <select class="input-group-text bg-white font-weight-custom" name="field"
-                                            id="">
+                                        <select class="input-group-text bg-white" name="field" style=" outline: 0">
                                             @foreach ($list_field as $field => $nameField)
                                                 <option {{ request()->field == $field ? 'selected' : '' }}
                                                     value="{{ $field }}">
@@ -75,7 +78,7 @@
                             <input type="submit" value="Tìm kiếm" name="search" class="btn btn-primary">
                         </form>
                     </div>
-                    
+
                     <div class="card-body">
                         <div class="analytic">
                             <a href="{{ route('attribute.list', ['kind' => 'active']) }}" class="text-primary">Kích

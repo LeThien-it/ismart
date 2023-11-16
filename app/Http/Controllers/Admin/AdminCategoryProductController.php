@@ -75,7 +75,7 @@ class AdminCategoryProductController extends Controller
         CategoryProduct::create([
             'name' => $request->name,
             'parent_id' => $request->parent_id,
-            'class' => $request->class,
+            'class_icon' => $request->class_icon,
             'position' => $request->position,
             'slug' => Str::slug($request->name, '-'),
             'user_id' => Auth::id()
@@ -95,7 +95,7 @@ class AdminCategoryProductController extends Controller
             'name' => $request->name,
             'parent_id' => $request->parent_id,
             'slug' => Str::slug($request->name, '-'),
-            'class' => $request->class,
+            'class_icon' => $request->class_icon,
             'position' => $request->position,
         ]);
 

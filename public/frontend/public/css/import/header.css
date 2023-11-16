@@ -263,7 +263,7 @@ i.bi-watch {
   padding-right: 0;
 }
 
-#header-bottom ul > li:hover > a {
+#header-bottom ul.nav>li:hover>a {
   color: #aaa;
 }
 

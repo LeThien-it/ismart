@@ -9,10 +9,12 @@
             <div class="card-body">
                 <form action="{{ route('role.update',$role->id) }}" method="POST">
                     @csrf
-                    <div class="col-md-12">
+                    <div class="col-md-12 p-0">
                         <div class="form-group">
-                            <label for="name">Tên nhóm quyền</label>
-                            <input class="form-control" type="text" name="name" id="name" value="{{ $role->name }}">
+                            <h6>
+                                <label>Tên nhóm quyền:</label>
+                            </h6>
+                            <input class="form-control" type="text" name="name" value="{{ $role->name }}">
                             @error('name')
                                 <div class="text-danger mb-1">
                                     <small>{{ $message }}</small>
@@ -21,8 +23,10 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="desc">Mô tả nhóm quyền</label>
-                            <input class="form-control" type="text" name="desc" id="desc" value="{{ $role->desc }}">
+                            <h6>
+                                <label>Mô tả nhóm quyền:</label>
+                            </h6>
+                            <input class="form-control" type="text" name="desc" value="{{ $role->desc }}">
                             @error('desc')
                                 <div class="text-danger mb-1">
                                     <small>{{ $message }}</small>
@@ -31,7 +35,7 @@
                         </div>
 
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12 p-0">
                         <div class="row">
                             <div class="col-md-12">
                                 <label>
@@ -40,7 +44,7 @@
                                 </label>
                                 @foreach ($permissionParents as $permissionParent)
                                     <div class="card mb-3">
-                                        <div class="card-header">
+                                        <div class="card-header h6">
                                             <label>
                                                 <input class="checkbox_wrapper" type="checkbox" value="">
                                             </label>
@@ -50,14 +54,14 @@
                                         <div class="row mx-0">
                                             @foreach ($permissionParent->permissionChildrens as $permissionChildren)
                                                 <div class="card-body col-md-3">
-                                                    <h6 class="card-title mb-0">
+                                                    <div class="card-title mb-0">
                                                         <label class="mb-0">
                                                             <input type="checkbox" name="permission_id[]"
                                                                 value="{{ $permissionChildren->id }}"
                                                                 class="checkbox_children" {{ $permissionIds->contains('id',$permissionChildren->id) ? 'checked' : '' }}>
                                                         </label>
                                                         {{ $permissionChildren->name }}
-                                                    </h6>
+                                                    </div>
                                                 </div>
                                             @endforeach
                                         </div>

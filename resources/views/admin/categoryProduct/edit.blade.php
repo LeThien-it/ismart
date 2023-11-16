@@ -19,11 +19,11 @@
                             <div class="col-12 clearfix px-0">
                                 <div class="form-group col-6 float-left pl-0">
                                     <h6>
-                                        <label for="name">Tên danh mục:</label>
+                                        <label>Tên danh mục:</label>
                                     </h6>
 
                                     <input class="form-control" type="text" name="name"
-                                        value="{{ $catProduct->name }}" id="name">
+                                        value="{{ $catProduct->name }}">
                                     @error('name')
                                         <div class="text-danger">
                                             <small>{{ $message }}</small>
@@ -33,7 +33,7 @@
 
                                 <div class="form-group col-6 float-right pr-0">
                                     <h6>
-                                        <label for="">Danh mục cha:</label>
+                                        <label>Danh mục cha:</label>
                                     </h6>
 
                                     <select class="form-control js-select-2" name="parent_id">
@@ -56,9 +56,9 @@
                                         <label>Icon danh mục:</label>
                                     </h6>
 
-                                    <input class="form-control" type="text" name="class"
-                                        value="{{ $catProduct->class }}">
-                                    @error('class')
+                                    <input class="form-control" type="text" name="class_icon"
+                                        value="{{ $catProduct->class_icon }}">
+                                    @error('class_icon')
                                         <div class="text-danger">
                                             <small>{{ $message }}</small>
                                         </div>

@@ -14,27 +14,27 @@ class SliderSeeder extends Seeder
         DB::table('permissions')->insert(
             [
                 [
-                    'name' => 'Slider-banners',
+                    'name' => 'Hình ảnh quảng cáo',
                     'key_code' => null,
                     'parent_id' => 0
                 ],
                 [
-                    'name' => 'Xem Slider-banners',
+                    'name' => 'Xem quảng cáo',
                     'key_code' => 'list_slider',
                     'parent_id' => 11
                 ],
                 [
-                    'name' => 'Thêm Slider-banners',
+                    'name' => 'Thêm quảng cáo',
                     'key_code' => 'add_slider',
                     'parent_id' => 11
                 ],
                 [
-                    'name' => 'Sửa Slider-banners',
+                    'name' => 'Sửa quảng cáo',
                     'key_code' => 'edit_slider',
                     'parent_id' => 11
                 ],
                 [
-                    'name' => 'Xóa Slider-banners',
+                    'name' => 'Xóa quảng cáo',
                     'key_code' => 'delete_slider',
                     'parent_id' => 11
                 ],

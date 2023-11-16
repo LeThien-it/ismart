@@ -13,8 +13,10 @@
                 <form action="{{ route('page.store') }}" method="POST">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Tên trang</label>
-                        <input class="form-control" type="text" name="name" id="name" value="{{ old('name') }}">
+                        <h6>
+                            <label>Tên trang:</label>
+                        </h6>
+                        <input class="form-control" type="text" name="name" value="{{ old('name') }}">
                         @error('name')
                             <div class="text-danger">
                                 <small>{{ $message }}</small>
@@ -23,10 +25,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="tinymce">Nội dung trang</label>
-                        <textarea name="content" class="form-control content-tiny" id="tinymce" cols="30"
-                            rows="15">{{ old('content') }}</textarea>
-                            @error('content')
+                        <h6>
+                            <label>Nội dung trang:</label>
+                        </h6>
+                        <textarea name="content" class="form-control content-tiny" cols="30" rows="15">{{ old('content') }}</textarea>
+                        @error('content')
                             <div class="text-danger">
                                 <small>{{ $message }}</small>
                             </div>
@@ -37,7 +40,8 @@
                         <h6>Trạng thái:</h6>
 
                         <div class="form-check">
-                            <input class="form-check-input" name="status" type="radio" value="0" id="status" checked>
+                            <input class="form-check-input" name="status" type="radio" value="0" id="status"
+                                checked>
                             <label class="form-check-label" for="status">
                                 Chờ duyệt
                             </label>
